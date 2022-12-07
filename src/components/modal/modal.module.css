@@ -1,0 +1,31 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--background);
+  border: 1px solid rgba(76, 76, 255, .2);
+  border-radius: var(--common-border-radius-s);
+  box-shadow: 0 24px 32px rgba(0, 0, 0, .04), 0 16px 24px rgba(0, 0, 0, .04), 0 4px 8px rgba(0, 0, 0, .04), 0 0 1px rgba(0, 0, 0, .04);
+  width: 720px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  composes: pt-10 pl-10 pr-10 from global;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--common-border-radius);
+}
+
+.title {
+  composes: text text_type_main-large from global;
+  margin: 0;
+}
+
+.div {
+  cursor: pointer;
+}
