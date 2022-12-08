@@ -1,0 +1,107 @@
+.section {
+  composes: pt-25 from global;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  max-width: 600px;
+  width: 100%;
+}
+
+.unactive {
+  composes: mb-4 mt-4 ml-4 from global;
+  box-sizing: border-box;
+  padding: 28px 24px;
+  border-radius: var(--common-border-radius-s);
+  background: var(--background-element);
+  max-width: 536px;
+  width: 100%;
+  min-height: 80px;
+  font-family: 'Jet Brains Mono';
+  font-size: 16px;
+  line-height: 24px;
+  color: #F2F2F3;
+  text-align: center;
+}
+
+.top {
+  composes: ml-4 from global;
+  box-sizing: border-box;
+  padding: 28px 24px;
+  border-radius: var(--top-constructor-item-border-radius);
+  background: var(--background-element);
+  max-width: 536px;
+  width: 100%;
+  min-height: 80px;
+  font-family: 'Jet Brains Mono';
+  font-size: 16px;
+  line-height: 24px;
+  color: #F2F2F3;
+  text-align: center;
+}
+
+.botton{
+  composes: ml-4 from global;
+  box-sizing: border-box;
+  padding: 28px 24px;
+  border-radius: var(--bottom-constructor-item-border-radius);
+  background: var(--background-element);
+  max-width: 536px;
+  width: 100%;
+  min-height: 80px;
+  font-family: 'Jet Brains Mono';
+  font-size: 16px;
+  line-height: 24px;
+  color: #F2F2F3;
+  text-align: center;
+}
+
+.bun {
+  composes: ml-4 from global;
+}
+
+.list {
+  max-height: calc(100vh - 516px);
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  list-style-type: none;
+  padding: 0;
+}
+
+.list::-webkit-scrollbar {
+  background-color: var(--background-element);
+  width: 8px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: var(--text-inactive-color);
+}
+
+.item {
+  composes: mb-4 mr-4 ml-4 from global;
+  display: flex;
+  align-items: center;
+}
+
+.item:last-of-type {
+  margin-bottom: 0;
+}
+
+.total {
+  composes: mt-10 from global;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: auto;
+}
+
+.priceBox {
+  composes: mr-10 from global;
+  display: flex;
+  align-items: center;
+}
+
+.price {
+  composes: text text_type_digits-medium pr-2 from global;
+}

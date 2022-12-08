@@ -1,0 +1,36 @@
+.wrapper {
+  composes: pt-4 pl-25 pr-25 pb-30 from global;
+  width: 720px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-top: 0;
+  composes: text_type_digits-large mb-8 from global;
+}
+
+.subtitle {
+  margin-top: 0;
+  composes: text text_type_main-medium mb-15 from global;
+}
+
+.img {
+  composes: mb-15 from global;
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border: none;
+}
+
+.text {
+  margin-top: 0;
+  composes: text text_type_main-default mb-2 from global;
+}
+
+.info {
+  margin-top: 0;
+  composes: text text_type_main-default text_color_inactive from global;
+}

@@ -1,0 +1,40 @@
+.header {
+  composes: pt-4 pb-4 from global;
+  width: 100%;
+  height: 88px;
+  background: var(--background);
+  box-sizing: border-box;
+  box-shadow: 0 24px 32px rgba(0, 0, 0, .04), 0 16px 24px rgba(0, 0, 0, .04), 0 4px 8px rgba(0, 0, 0, .04), 0 0 1px rgba(0, 0, 0, .04);
+  border: none;
+  display: flex;
+  justify-content: center;
+}
+
+.nav {
+  width: 1280px;
+  display: flex;
+  column-gap: 8px;
+}
+
+.link {
+  composes: pt-4 pb-4 pl-5 pr-5 text text text_type_main-default from global;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  color: var(--text-inactive-color);
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+}
+
+.link:first-child {
+  color: var(--text-primary-color);
+}
+
+.link:nth-child(3) {
+  margin: 0 auto;
+}
+
+.link:last-child {
+  margin-left: auto;
+}
