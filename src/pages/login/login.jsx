@@ -1,10 +1,15 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useCallback } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./login.module.css";
+import { login } from '../../services/actions/actions';
 
 function Login() {
+  const { isAuth } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
@@ -15,6 +20,23 @@ function Login() {
   const onPasswordChange = (e) => {
     setPassword(e.target.value);
   };
+
+  const handleLogin = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch(login(email, password));
+    },
+    [password, email]
+  );
+
+  if (isAuth) {
+    return (
+      <Redirect to={{
+        pathname: '/',
+      }}
+      />
+    );
+  }
 
   return (
     <div className={style.container}>
@@ -38,7 +60,7 @@ function Login() {
             size="default"
           />
         </div>
-        <Button htmlType="button" type="primary" size="medium">
+        <Button htmlType="button" type="primary" size="medium" onClick={(e) => handleLogin(e)}>
           Войти
         </Button>
       </form>

@@ -1,10 +1,15 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useCallback } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Input, EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./register.module.css";
+import { register } from '../../services/actions/actions';
 
 function Register() {
+  const { isAuth } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -20,6 +25,23 @@ function Register() {
   const onPasswordChange = (e) => {
     setPassword(e.target.value);
   };
+
+  const handleLogin = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch(register(name, email, password));
+    },
+    [name, password, email]
+  );
+
+  if (isAuth) {
+    return (
+      <Redirect to={{
+        pathname: '/',
+      }}
+      />
+    );
+  }
 
   return (
     <div className={style.container}>
@@ -55,7 +77,7 @@ function Register() {
             size="default"
           />
         </div>
-        <Button htmlType="button" type="primary" size="medium">
+        <Button htmlType="button" type="primary" size="medium" onClick={(e) => handleLogin(e)}>
           Зарегистрироваться
         </Button>
       </form>
