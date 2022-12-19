@@ -51,6 +51,56 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
 export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED';
 
+export function getUser() {
+  return function(dispatch) {
+    dispatch({
+      type: GET_USER_REQUEST
+    });
+    api.getUser()
+    .then((res) => {
+      dispatch({
+        type: GET_USER,
+        user: res.user,
+      });
+    })
+    .catch(() => {
+      if (localStorage.getItem('jwt')) {
+        dispatch(refreshToken());
+        dispatch(getUser());
+      } else {
+        dispatch({
+          type: GET_USER_FAILED
+        });
+      }
+    });
+  }
+};
+
+export function updateUser(name, email, password) {
+  return function(dispatch) {
+    dispatch({
+      type: UPDATE_USER_REQUEST
+    });
+    api.updateUser(name, email, password)
+    .then((res) => {
+      dispatch({
+        type: UPDATE_USER,
+        user: res.user,
+      });
+    })
+    .catch(() => {
+      if (localStorage.getItem('jwt')) {
+        dispatch(refreshToken());
+        dispatch(updateUser(name, email, password));
+      } else {
+        dispatch({
+          type: UPDATE_USER_FAILED
+        });
+      }
+    });
+  }
+};
+
 export function requestPassword(email) {
   return function(dispatch) {
     dispatch({

@@ -125,9 +125,33 @@ class Api {
   };
 
   //получение данных о пользователе
+  getUser() {
+    return fetch(`${api.url}/auth/user`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${getCookie('token')}`,
+      },
+    })
+    .then(res => this._checkResponse(res));
+  };
 
   //обновление данных пользователя
-
+  updateUser(name, email, password) {
+  return fetch(`${api.url}/auth/user`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${getCookie('token')}`,
+    },
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      password: password,
+    }),
+  })
+  .then(res => this._checkResponse(res));
+};
 }
     
 const api = new Api({
