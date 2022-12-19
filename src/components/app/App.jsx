@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Route, Router, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import AppHeader from '../app-header/app-header';
 import Main from '../main/main';
@@ -25,6 +25,7 @@ function App() {
   return (
     <div className={style.App}>
       <AppHeader />
+      <Switch>
       <Route path="/" exact={true}>
         <Main>
           {isLoading && "Загрузка..."}
@@ -37,7 +38,11 @@ function App() {
           )}
         </Main>
       </Route>
-     </div>
+      <Route path="/register" exact={true}>
+        <Register />
+      </Route>
+      </Switch>
+    </div>
   );
 }
 

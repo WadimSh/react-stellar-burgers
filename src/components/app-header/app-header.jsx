@@ -10,7 +10,7 @@ function AppHeader() {
       <nav className={style.nav}>
         <NavLink to="/" className={style.link} activeClassName={style.linkActive}>
           <BurgerIcon
-           type="primary"
+           type="secondary"
           />
           Конструктор
         </NavLink>
@@ -23,7 +23,7 @@ function AppHeader() {
         <div className={style.logo}>
           <Logo />
         </div>
-        <NavLink to="/profile" className={style.link} activeClassName={style.linkActive}>
+        <NavLink to="/register" className={style.link} activeClassName={style.linkActive}>
           <ProfileIcon
            type="secondary"
           />
