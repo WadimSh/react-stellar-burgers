@@ -9,7 +9,7 @@ import Main from '../main/main';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 
-import {Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound } from '../../pages';
+import { Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound } from '../../pages';
 import { getIngredientsBurger } from '../../services/actions/actions';
 import style from './App.module.css';
 
@@ -37,6 +37,9 @@ function App() {
             </DndProvider>
           )}
         </Main>
+      </Route>
+      <Route path="/login" exact={true}>
+        <Login />
       </Route>
       <Route path="/register" exact={true}>
         <Register />

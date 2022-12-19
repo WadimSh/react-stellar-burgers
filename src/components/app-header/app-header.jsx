@@ -23,7 +23,7 @@ function AppHeader() {
         <div className={style.logo}>
           <Logo />
         </div>
-        <NavLink to="/register" className={style.link} activeClassName={style.linkActive}>
+        <NavLink to="/login" className={style.link} activeClassName={style.linkActive}>
           <ProfileIcon
            type="secondary"
           />
