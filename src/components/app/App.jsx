@@ -44,6 +44,9 @@ function App() {
       <Route path="/register" exact={true}>
         <Register />
       </Route>
+      <Route path="/forgot-password" exact={true}>
+        <ForgotPassword />
+      </Route>
       </Switch>
     </div>
   );
