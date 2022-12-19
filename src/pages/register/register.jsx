@@ -26,7 +26,7 @@ function Register() {
     setPassword(e.target.value);
   };
 
-  const handleLogin = useCallback(
+  const handleRegister = useCallback(
     (e) => {
       e.preventDefault();
       dispatch(register(name, email, password));
@@ -77,7 +77,7 @@ function Register() {
             size="default"
           />
         </div>
-        <Button htmlType="button" type="primary" size="medium" onClick={(e) => handleLogin(e)}>
+        <Button htmlType="button" type="primary" size="medium" onClick={(e) => handleRegister(e)}>
           Зарегистрироваться
         </Button>
       </form>

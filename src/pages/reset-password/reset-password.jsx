@@ -1,20 +1,44 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useCallback } from "react";
+import { Link, Redirect, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./reset-password.module.css";
+import { resetPassword } from '../../services/actions/actions';
 
 function ResetPassword() {
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const { isAuth } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const onNameChange = (e) => {
-    setName(e.target.value);
+  const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
+
+  const onTokenChange = (e) => {
+    setToken(e.target.value);
   };
 
   const onPasswordChange = (e) => {
     setPassword(e.target.value);
   };
+
+  const handleResetPassword = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch(resetPassword(token, password));
+      history.push('/login');
+    },
+    [token, password]
+  );
+
+  if (isAuth) {
+    return (
+      <Redirect to={{
+        pathname: '/',
+      }}
+      />
+    );
+  }
 
   return (
     <div className={style.container}>
@@ -35,15 +59,15 @@ function ResetPassword() {
           <Input
             type={"text"}
             placeholder={"Введите код из письма"}
-            onChange={onNameChange}
-            value={name}
-            name={"name"}
+            onChange={onTokenChange}
+            value={token}
+            name={"token"}
             error={false}
             errorText={"Ошибка"}
             size={"default"}
           />
         </div>
-        <Button htmlType="button" type="primary" size="medium">
+        <Button htmlType="button" type="primary" size="medium" onClick={(e) => handleResetPassword(e)}>
           Сохранить
         </Button>
       </form>
