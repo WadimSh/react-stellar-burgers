@@ -50,6 +50,9 @@ function App() {
       <Route path="/reset-password" exact={true}>
         <ResetPassword />
       </Route>
+      <Route>
+        <NotFound />
+      </Route>
       </Switch>
     </div>
   );

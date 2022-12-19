@@ -8,13 +8,13 @@ function AppHeader() {
   return (
     <header className={style.header}>
       <nav className={style.nav}>
-        <NavLink to="/" className={style.link} activeClassName={style.linkActive}>
+        <NavLink exact to="/" className={style.link} activeClassName={style.linkActive}>
           <BurgerIcon
            type="secondary"
           />
           Конструктор
         </NavLink>
-        <NavLink to="/orders" className={style.link} activeClassName={style.linkActive}>
+        <NavLink exact to="/orders" className={style.link} activeClassName={style.linkActive}>
           <ListIcon
            type="secondary"
           />
@@ -23,7 +23,7 @@ function AppHeader() {
         <div className={style.logo}>
           <Logo />
         </div>
-        <NavLink to="/login" className={style.link} activeClassName={style.linkActive}>
+        <NavLink exact to="/login" className={style.link} activeClassName={style.linkActive}>
           <ProfileIcon
            type="secondary"
           />

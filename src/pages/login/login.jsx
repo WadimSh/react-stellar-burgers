@@ -39,7 +39,7 @@ function Login() {
   }
 
   return (
-    <div className={style.container}>
+    <section className={style.container}>
       <h2 className={style.title}>
         Вход
       </h2>
@@ -76,7 +76,7 @@ function Login() {
           Восстановить пароль
         </Link>
       </p>
-    </div>
+    </section>
   );
 }
 

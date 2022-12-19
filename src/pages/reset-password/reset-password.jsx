@@ -41,7 +41,7 @@ function ResetPassword() {
   }
 
   return (
-    <div className={style.container}>
+    <section className={style.container}>
       <h2 className={style.title}>
         Восстановление пароля
       </h2>
@@ -77,7 +77,7 @@ function ResetPassword() {
           Войти
         </Link>
       </p>
-    </div>
+    </section>
   );
 }
 
