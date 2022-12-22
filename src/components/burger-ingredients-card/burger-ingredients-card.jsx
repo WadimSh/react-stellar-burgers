@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
+import { Link, useLocation, } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
@@ -8,6 +9,7 @@ import { messagePropTypes } from '../../utils/messagePropTypes';
 import style from './burger-ingredients-card.module.css';
 
 function BurgerIngredientsCard({ element, handleElement }) {
+  const location = useLocation();
   const { bun, ingredients } = useSelector((store) => store.currentBurger);
   const clickElement = () => { handleElement(element) };
 

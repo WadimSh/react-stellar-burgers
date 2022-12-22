@@ -1,7 +1,8 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
+import useInputs from '../../hooks/use-inputs';
 import { Input, EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./register.module.css";
 import { register } from '../../services/actions/actions';
@@ -9,37 +10,19 @@ import { register } from '../../services/actions/actions';
 function Register() {
   const { isAuth } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-
-  const onNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const onEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const onPasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
+  const { values, handleValues } = useInputs({ name: "", email: "", password: "" }) 
+  
   const handleRegister = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(register(name, email, password));
+      dispatch(register(values.name, values.email, values.password));
     },
-    [name, password, email]
+    [values.name, values.password, values.email]
   );
 
   if (isAuth) {
     return (
-      <Redirect to={{
-        pathname: '/',
-      }}
-      />
+      <Redirect to='/' />
     );
   }
 
@@ -53,8 +36,8 @@ function Register() {
           <Input
             type={"text"}
             placeholder={"Имя"}
-            onChange={onNameChange}
-            value={name}
+            onChange={handleValues}
+            value={values.name}
             name={"name"}
             error={false}
             errorText={"Ошибка"}
@@ -63,21 +46,27 @@ function Register() {
         </div>
         <div className={style.wrapper}>
           <EmailInput
-            onChange={onEmailChange}
-            value={email}
+            onChange={handleValues}
+            value={values.email}
             name={"email"}
             size="default"
           />
         </div>
         <div className={style.wrapper}>
           <PasswordInput
-            onChange={onPasswordChange}
-            value={password}
+            onChange={handleValues}
+            value={values.password}
             name={"password"}
             size="default"
           />
         </div>
-        <Button htmlType="button" type="primary" size="medium" onClick={(e) => handleRegister(e)}>
+        <Button
+          htmlType="button"
+          type="primary"
+          size="medium"
+          onClick={(e) => handleRegister(e)}
+          disabled={!values.password || !values.email || !values.name}
+        >
           Зарегистрироваться
         </Button>
       </form>

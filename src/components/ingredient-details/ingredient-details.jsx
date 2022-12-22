@@ -2,8 +2,7 @@ import { useSelector } from 'react-redux';
 
 import style from './ingredient-details.module.css';
 
-function IngredientDetails() {
-const { ingredient } = useSelector((store) => store.ingredientData);
+function IngredientDetails({ ingredient }) {
   
 return (
     <div className={style.wrapper} key={ingredient._id}>

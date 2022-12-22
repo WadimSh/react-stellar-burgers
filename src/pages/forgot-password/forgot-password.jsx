@@ -50,7 +50,13 @@ function ForgotPassword() {
             size="default"
           />
         </div>
-        <Button htmlType="button" type="primary" size="medium" onClick={(e) => handleForgotPassword(e)}>
+        <Button
+          htmlType="button"
+          type="primary"
+          size="medium"
+          onClick={(e) => handleForgotPassword(e)}
+          disabled={!email}
+        >
           Восстановить
         </Button>
       </form>

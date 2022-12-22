@@ -8,6 +8,7 @@ import AppHeader from '../app-header/app-header';
 import Main from '../main/main';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
+import ProtectedRoute from '../protected-route/protected-route';
 
 import { Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound } from '../../pages';
 import { getIngredientsBurger } from '../../services/actions/actions';
@@ -50,9 +51,12 @@ function App() {
       <Route path="/reset-password" exact={true}>
         <ResetPassword />
       </Route>
-      <Route path="/profile" exact={true}>
-        <Profile />
+      <Route path="/ingredients/:id" exact={true}>
+        <Ingredients />
       </Route>
+      <ProtectedRoute path="/profile">
+        <Profile />
+      </ProtectedRoute>
       <Route>
         <NotFound />
       </Route>

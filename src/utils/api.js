@@ -38,7 +38,7 @@ class Api {
 
   //востановление пароля
   requestPassword(email) {
-    return fetch(`${api.url}/password-reset`, {
+    return fetch(`${this.url}/password-reset`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,8 +51,8 @@ class Api {
   }
 
   //сброс пароля
-  resetPassword(token, password) {
-    return fetch(`${api.url}/password-reset/reset`, {
+  resetPassword(password, token) {
+    return fetch(`${this.url}/password-reset/reset`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +67,7 @@ class Api {
 
   //авторизация пользователя
   authorization(email, password) {
-    return fetch(`${api.url}/auth/login`, {
+    return fetch(`${this.url}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -82,7 +82,7 @@ class Api {
 
   //регистрация пользователя
   registerUser(name, email, password) {
-    return fetch(`${api.url}/auth/register`, {
+    return fetch(`${this.url}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +98,7 @@ class Api {
 
   //обнавление токена
   updateToken() {
-    return fetch(`${api.url}/auth/token`, {
+    return fetch(`${this.url}/auth/token`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -112,7 +112,7 @@ class Api {
 
   //выход из системы
   logout() {
-    return fetch(`${api.url}/auth/logout`, {
+    return fetch(`${this.url}/auth/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -126,7 +126,7 @@ class Api {
 
   //получение данных о пользователе
   getUser() {
-    return fetch(`${api.url}/auth/user`, {
+    return fetch(`${this.url}/auth/user`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -138,7 +138,7 @@ class Api {
 
   //обновление данных пользователя
   updateUser(name, email, password) {
-  return fetch(`${api.url}/auth/user`, {
+  return fetch(`${this.url}/auth/user`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

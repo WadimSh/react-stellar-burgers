@@ -76,7 +76,12 @@ function Profile() {
       <Switch>
         <Route exact path={`${path}`}>
           <ProfileForm
-            
+            name={name}
+            email={email}
+            password={password}
+            onNameChange={onNameChange}
+            onEmailChange={onEmailChange}
+            onPasswordChange={onPasswordChange}
           />
         </Route>
       </Switch>

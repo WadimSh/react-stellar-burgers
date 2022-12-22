@@ -1,37 +1,29 @@
-import { useState, useCallback } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { useCallback } from "react";
+import { Link, Redirect, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
+import useInputs from '../../hooks/use-inputs';
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./login.module.css";
 import { login } from '../../services/actions/actions';
 
 function Login() {
+  const location = useLocation();
   const { isAuth } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  
-  const onEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const onPasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
+  const { values, handleValues } = useInputs({ email: "", password: "" });
+  const { from } = location.state || { from: { pathname: "/" } };
   const handleLogin = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(login(email, password));
+      dispatch(login(values.email, values.password));
     },
-    [password, email]
+    [values.password, values.email]
   );
 
   if (isAuth) {
     return (
-      <Redirect to='/' />
+      <Redirect to={from} />
     );
   }
 
@@ -43,21 +35,27 @@ function Login() {
       <form className={style.form}>
         <div className={style.wrapper}>
           <EmailInput
-            onChange={onEmailChange}
-            value={email}
+            onChange={handleValues}
+            value={values.email}
             name={"email"}
             size="default"
           />
         </div>
         <div className={style.wrapper}>
           <PasswordInput
-            onChange={onPasswordChange}
-            value={password}
+            onChange={handleValues}
+            value={values.password}
             name={"password"}
             size="default"
           />
         </div>
-        <Button htmlType="button" type="primary" size="medium" onClick={(e) => handleLogin(e)}>
+        <Button
+          htmlType="button"
+          type="primary"
+          size="medium"
+          onClick={(e) => handleLogin(e)}
+          disabled={!values.password || !values.email}
+        >
           Войти
         </Button>
       </form>

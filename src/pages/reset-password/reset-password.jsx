@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
+import useInputs from '../../hooks/use-inputs';
 import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./reset-password.module.css";
 import { resetPassword } from '../../services/actions/actions';
@@ -10,33 +11,20 @@ function ResetPassword() {
   const { isAuth } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const history = useHistory();
-
-  const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
-
-  const onTokenChange = (e) => {
-    setToken(e.target.value);
-  };
-
-  const onPasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+  const { values, handleValues } = useInputs({ password: "", token: "" });
 
   const handleResetPassword = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(resetPassword(token, password));
+      dispatch(resetPassword(values.password, values.token));
       history.push('/login');
     },
-    [token, password]
+    [values.token, values.password]
   );
 
   if (isAuth) {
     return (
-      <Redirect to={{
-        pathname: '/',
-      }}
-      />
+      <Redirect to="/" />
     );
   }
 
@@ -49,8 +37,8 @@ function ResetPassword() {
         <div className={style.wrapper}>
           <PasswordInput
             placeholder={"Введите новый пароль"}
-            onChange={onPasswordChange}
-            value={password}
+            onChange={handleValues}
+            value={values.password}
             name={"password"}
             size="default"
           />
@@ -59,15 +47,21 @@ function ResetPassword() {
           <Input
             type={"text"}
             placeholder={"Введите код из письма"}
-            onChange={onTokenChange}
-            value={token}
+            onChange={handleValues}
+            value={values.token}
             name={"token"}
             error={false}
             errorText={"Ошибка"}
             size={"default"}
           />
         </div>
-        <Button htmlType="button" type="primary" size="medium" onClick={(e) => handleResetPassword(e)}>
+        <Button
+          htmlType="button"
+          type="primary"
+          size="medium"
+          onClick={(e) => handleResetPassword(e)}
+          disabled={!values.password || !values.token}
+        >
           Сохранить
         </Button>
       </form>
