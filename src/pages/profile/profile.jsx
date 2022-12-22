@@ -1,35 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Switch, useRouteMatch, NavLink } from 'react-router-dom';
+import { Route, Switch, NavLink } from 'react-router-dom';
 
+import useInputs from '../../hooks/use-inputs';
 import ProfileForm from './profile-form/profile-form';
 import style from "./profile.module.css";
-import { logout, getUser, updateUser } from '../../services/actions/actions';
+import { logout, updateUser } from '../../services/actions/actions';
 
 function Profile() {
   const dispatch = useDispatch();
-  const { path } = useRouteMatch();
+
   const { user } = useSelector((store) => store.auth);
+  const { values, handleValues, setValues } = useInputs({ name: user.name, email: user.email, password: user.password });
+  const [disabledButton, setDisabledButton] = useState(false);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-
-  const onNameChange = (e) => {
-    setName(e.target.value);
+  const handleUpdate = () => {
+    dispatch(updateUser(values.name, values.email, values.password));
   };
 
-  const onEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const onPasswordChange = (e) => {
-    setPassword(e.target.value);
+  const handleReset = () => {
+    setValues({ name: user.name, email: user.email, password: user.password });
   };
 
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  useEffect(() => {
+    setDisabledButton(!disabledButton);
+  }, [values]);
 
   return (
     <section className={style.wrapper}>
@@ -74,14 +73,13 @@ function Profile() {
         </p>
       </nav>
       <Switch>
-        <Route exact path={`${path}`}>
+        <Route exact path="/profile">
           <ProfileForm
-            name={name}
-            email={email}
-            password={password}
-            onNameChange={onNameChange}
-            onEmailChange={onEmailChange}
-            onPasswordChange={onPasswordChange}
+            values={values}
+            handleValues={handleValues}
+            handleReset={handleReset}
+            handleUpdate={handleUpdate}
+            disabledButton={disabledButton}
           />
         </Route>
       </Switch>

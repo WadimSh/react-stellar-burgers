@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
 import useInputs from '../../hooks/use-inputs';
@@ -8,9 +8,12 @@ import style from "./register.module.css";
 import { register } from '../../services/actions/actions';
 
 function Register() {
-  const { isAuth } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
-  const { values, handleValues } = useInputs({ name: "", email: "", password: "" }) 
+  const location = useLocation();
+
+  const { isAuth } = useSelector((store) => store.auth);
+  const { values, handleValues } = useInputs({ name: "", email: "", password: "" });
+  const { from } = location.state || { from: { pathname: "/" } };
   
   const handleRegister = useCallback(
     (e) => {
@@ -22,7 +25,7 @@ function Register() {
 
   if (isAuth) {
     return (
-      <Redirect to='/' />
+      <Redirect to={from} />
     );
   }
 

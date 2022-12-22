@@ -66,7 +66,13 @@ export function getUser() {
     .catch(() => {
       if (localStorage.getItem('jwt')) {
         dispatch(refreshToken());
-        dispatch(getUser());
+        api.getUser()
+          .then((res) => {
+            dispatch({
+              type: GET_USER,
+              user: res.user,
+            });
+          })
       } else {
         dispatch({
           type: GET_USER_FAILED

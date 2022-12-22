@@ -9,10 +9,12 @@ import { login } from '../../services/actions/actions';
 
 function Login() {
   const location = useLocation();
-  const { isAuth } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
+
+  const { isAuth } = useSelector((store) => store.auth);
   const { values, handleValues } = useInputs({ email: "", password: "" });
   const { from } = location.state || { from: { pathname: "/" } };
+  
   const handleLogin = useCallback(
     (e) => {
       e.preventDefault();

@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
 import useInputs from '../../hooks/use-inputs';
@@ -8,10 +8,13 @@ import style from "./reset-password.module.css";
 import { resetPassword } from '../../services/actions/actions';
 
 function ResetPassword() {
-  const { isAuth } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
+
+  const { isAuth } = useSelector((store) => store.auth);
   const { values, handleValues } = useInputs({ password: "", token: "" });
+  const { from } = location.state || { from: { pathname: "/" } };
 
   const handleResetPassword = useCallback(
     (e) => {
@@ -24,7 +27,7 @@ function ResetPassword() {
 
   if (isAuth) {
     return (
-      <Redirect to="/" />
+      <Redirect to={from} />
     );
   }
 

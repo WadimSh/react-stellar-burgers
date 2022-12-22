@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -7,12 +7,14 @@ import style from "./forgot-password.module.css";
 import { requestPassword } from '../../services/actions/actions';
 
 function ForgotPassword() {
-  const { isAuth } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
 
+  const { isAuth } = useSelector((store) => store.auth);
   const [email, setEmail] = useState("");
-  
+  const { from } = location.state || { from: { pathname: "/" } };
+
   const onEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -28,10 +30,7 @@ function ForgotPassword() {
 
   if (isAuth) {
     return (
-      <Redirect to={{
-        pathname: '/',
-      }}
-      />
+      <Redirect to={from} />
     );
   }
 
