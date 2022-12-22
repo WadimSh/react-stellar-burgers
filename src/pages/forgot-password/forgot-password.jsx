@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./forgot-password.module.css";
-import { requestPassword } from '../../services/actions/actions';
+import { requestPassword } from '../../services/actions/auth-actions';
 
 function ForgotPassword() {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ function ForgotPassword() {
       <h2 className={style.title}>
         Восстановление пароля
       </h2>
-      <form className={style.form}>
+      <form className={style.form} onSubmit={(e) => handleForgotPassword(e)}>
         <div className={style.wrapper}>
           <EmailInput
             onChange={onEmailChange}
@@ -50,10 +50,9 @@ function ForgotPassword() {
           />
         </div>
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
-          onClick={(e) => handleForgotPassword(e)}
           disabled={!email}
         >
           Восстановить

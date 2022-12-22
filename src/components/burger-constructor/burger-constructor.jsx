@@ -8,7 +8,7 @@ import BurgerConstructorIngredient from '../burger-constructor-ingredient/burger
 import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
-import { postOrderBurger, OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL, ADD_BUN, ADD_INGREDIENT } from '../../services/actions/actions';
+import { postOrderBurger, OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL, ADD_BUN, ADD_INGREDIENT, CLEAN_INGREDIENT } from '../../services/actions/actions';
 import style from './burger-constructor.module.css';
 
 function BurgerConstructor() {
@@ -33,6 +33,13 @@ function BurgerConstructor() {
     if (isAuth) {
       dispatch(postOrderBurger(indexIngredients));
       dispatch({ type: OPEN_ORDER_MODAL });
+      dispatch({
+        type: ADD_BUN,
+        data: {},
+      });
+      dispatch({
+        type: CLEAN_INGREDIENT
+      });
     } else {
       history.push('/login');
     }

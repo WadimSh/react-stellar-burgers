@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useInputs from '../../hooks/use-inputs';
 import { Input, EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./register.module.css";
-import { register } from '../../services/actions/actions';
+import { register } from '../../services/actions/auth-actions';
 
 function Register() {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ function Register() {
       <h2 className={style.title}>
         Регистрация
       </h2>
-      <form className={style.form}>
+      <form className={style.form} onSubmit={(e) => handleRegister(e)}>
         <div className={style.wrapper}>
           <Input
             type={"text"}
@@ -64,10 +64,9 @@ function Register() {
           />
         </div>
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
-          onClick={(e) => handleRegister(e)}
           disabled={!values.password || !values.email || !values.name}
         >
           Зарегистрироваться

@@ -7,9 +7,11 @@ function IngredientDetails() {
   const { id } = useParams();
   const ingredients = useSelector((store) => store.ingredientsBurger.data);
   const ingredient = ingredients.find((item) => item._id === id);
+
+  if (!ingredient) return null;
   
 return (
-    <div className={style.wrapper} key={ingredient._id}>
+    <div className={style.wrapper}>
       <img className={style.img} src={ingredient?.image} alt={ingredient?.name} />
       <h2 className={style.title}>{ingredient?.name}</h2>
       <ul className={style.list}>

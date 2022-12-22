@@ -3,7 +3,7 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 
 import ProfileForm from './profile-form/profile-form';
 import style from "./profile.module.css";
-import { logout } from '../../services/actions/actions';
+import { logout } from '../../services/actions/auth-actions';
 
 function Profile() {
   const dispatch = useDispatch();

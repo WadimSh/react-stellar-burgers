@@ -15,7 +15,7 @@ function BurgerIngredientsBlock({ type, name, tabRef }) {
           data.filter(item => item.type === type).map((element, index) => (
             <BurgerIngredientsCard
               element={element}
-              key={index}
+              key={element._id}
               
             />
           ))

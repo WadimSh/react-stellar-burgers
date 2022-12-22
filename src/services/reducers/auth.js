@@ -23,13 +23,12 @@ import {
   UPDATE_USER,
   UPDATE_USER_REQUEST,
   UPDATE_USER_FAILED,
-} from '../actions/actions';
+} from '../actions/auth-actions';
 
 const initialState = {
   user: {
     name: '',
     email: '',
-    password: ''
   },
   isRegisterRequest: false,
   isRegisterFailed: false,

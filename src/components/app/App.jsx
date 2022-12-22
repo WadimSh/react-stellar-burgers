@@ -13,7 +13,7 @@ import ProtectedRoute from '../protected-route/protected-route';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 
-import { getUser } from '../../services/actions/actions';
+import { getUser } from '../../services/actions/auth-actions';
 import { Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound } from '../../pages';
 import { getIngredientsBurger } from '../../services/actions/actions';
 import style from './App.module.css';
@@ -26,7 +26,7 @@ function App() {
   const { isAuth } = useSelector((store) => store.auth);
   const isLoading = useSelector((store) => store.ingredientsBurger.isLoading);
   const hasError = useSelector((store) => store.ingredientsBurger.hasError);
-  const background = location.state?.background;
+  const background = location.state && location.state.background;
   
   const clickButton = () => {
     history.goBack();
@@ -45,7 +45,7 @@ function App() {
   return (
     <div className={style.App}>
       <AppHeader />
-      <Switch>
+      <Switch location={background || location}>
       <Route path="/" exact={true}>
         <Main>
           {isLoading && "Загрузка..."}
@@ -82,7 +82,7 @@ function App() {
       </Switch>
       {background && (
         <Route path="/ingredients/:id">
-          <Modal onClose={clickButton} title="Детали ингредиента">
+          <Modal onClose={clickButton} header="Детали ингредиента">
             <IngredientDetails />
           </Modal>
         </Route>

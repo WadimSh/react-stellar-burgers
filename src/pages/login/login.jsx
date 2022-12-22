@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useInputs from '../../hooks/use-inputs';
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./login.module.css";
-import { login } from '../../services/actions/actions';
+import { login } from '../../services/actions/auth-actions';
 
 function Login() {
   const location = useLocation();
@@ -34,7 +34,7 @@ function Login() {
       <h2 className={style.title}>
         Вход
       </h2>
-      <form className={style.form}>
+      <form className={style.form} onSubmit={(e) => handleLogin(e)}>
         <div className={style.wrapper}>
           <EmailInput
             onChange={handleValues}
@@ -52,10 +52,9 @@ function Login() {
           />
         </div>
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
-          onClick={(e) => handleLogin(e)}
           disabled={!values.password || !values.email}
         >
           Войти

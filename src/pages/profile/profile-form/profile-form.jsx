@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import useInputs from '../../../hooks/use-inputs';
-import { updateUser } from '../../../services/actions/actions';
+import { updateUser } from '../../../services/actions/auth-actions';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './profile-form.module.css';
 
@@ -10,16 +10,20 @@ function ProfileForm() {
   const dispatch = useDispatch();
 
   const { user } = useSelector((store) => store.auth);
-  const { values, handleValues, setValues } = useInputs({ name: user.name, email: user.email, password: user.password });
+  const { values, handleValues, setValues } = useInputs({ name: user.name, email: user.email, password: "" });
   const [disabledButton, setDisabledButton] = useState(false);
 
-  const handleUpdate = () => {
+  const handleUpdate = useCallback(
+    (e) => {
+      e.preventDefault();
     dispatch(updateUser(values.name, values.email, values.password));
     setDisabledButton(!disabledButton);
-  };
+  },
+  [values, disabledButton]
+);
 
   const handleReset = () => {
-    setValues({ name: user.name, email: user.email, password: user.password });
+    setValues({ name: user.name, email: user.email, password: "" });
   };
 
   useEffect(() => {
@@ -27,7 +31,7 @@ function ProfileForm() {
   }, [values]);
 
   return (
-    <form className={style.form}>
+    <form className={style.form} onSubmit={(e) => handleUpdate(e)}>
       <Input
         type="text"
         name="name"
@@ -35,6 +39,8 @@ function ProfileForm() {
         placeholder="Имя"
         icon="EditIcon"
         onChange={handleValues}
+        error={false}
+        errorText={"Ошибка"}
       />
       <Input
         type="email"
@@ -43,6 +49,8 @@ function ProfileForm() {
         placeholder="Логин"
         icon="EditIcon"
         onChange={handleValues}
+        error={false}
+        errorText={"Ошибка"}
       />
       <Input
         type="password"
@@ -51,6 +59,8 @@ function ProfileForm() {
         placeholder="Пароль"
         icon="EditIcon"
         onChange={handleValues}
+        error={false}
+        errorText={"Ошибка"}
       />
       <div className={style.buttons}>
         <Button
@@ -63,10 +73,9 @@ function ProfileForm() {
           Oтмена
         </Button>
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
-          onClick={handleUpdate}
           disabled={!disabledButton}
         >
           Сохранить
