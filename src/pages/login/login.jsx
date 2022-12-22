@@ -31,10 +31,7 @@ function Login() {
 
   if (isAuth) {
     return (
-      <Redirect to={{
-        pathname: '/',
-      }}
-      />
+      <Redirect to='/' />
     );
   }
 

@@ -14,7 +14,7 @@ function AppHeader() {
           />
           Конструктор
         </NavLink>
-        <NavLink exact to="/orders" className={style.link} activeClassName={style.linkActive}>
+        <NavLink exact to="/profile" className={style.link} activeClassName={style.linkActive}>
           <ListIcon
            type="secondary"
           />

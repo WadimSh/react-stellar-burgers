@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
+import { useHistory } from 'react-router-dom';
 
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstructorIngredient from '../burger-constructor-ingredient/burger-constructor-ingredient';
@@ -12,7 +13,9 @@ import style from './burger-constructor.module.css';
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { bun, ingredients } = useSelector((store) => store.currentBurger);
+  const { isAuth } = useSelector((store) => store.auth);
   const { modal } = useSelector((store) => store.orderNumber);
   const [total, setTotal] = useState(0);
 
@@ -27,8 +30,12 @@ function BurgerConstructor() {
   }, [bun, ingredients]);
 
   const handleOrder = () => {
-    dispatch(postOrderBurger(indexIngredients));
-    dispatch({ type: OPEN_ORDER_MODAL });
+    if (isAuth) {
+      dispatch(postOrderBurger(indexIngredients));
+      dispatch({ type: OPEN_ORDER_MODAL });
+    } else {
+      history.push('/login');
+    }
   }
 
   const [, dropTarget] = useDrop({

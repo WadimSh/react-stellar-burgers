@@ -29,6 +29,7 @@ const initialState = {
   user: {
     name: '',
     email: '',
+    password: ''
   },
   isRegisterRequest: false,
   isRegisterFailed: false,
