@@ -7,7 +7,7 @@ import style from "./ingredients.module.css";
 
 function Ingredients() {
   const { id } = useParams();
-  const ingredients = useSelector((store) => store.ingredients.data);
+  const ingredients = useSelector((store) => store.ingredientsBurger.data);
   const currentIngredient = useMemo(() => ingredients.find((item) => item._id === id), [ingredients]);
 
   return (

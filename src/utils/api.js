@@ -30,6 +30,7 @@ class Api {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `${getCookie('token')}`,
       },
       body: JSON.stringify({ ingredients: data }),
     })

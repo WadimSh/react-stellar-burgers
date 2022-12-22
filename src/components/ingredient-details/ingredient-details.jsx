@@ -1,21 +1,25 @@
 import { useSelector } from 'react-redux';
+import { useParams } from "react-router-dom";
 
 import style from './ingredient-details.module.css';
 
-function IngredientDetails({ ingredient }) {
+function IngredientDetails() {
+  const { id } = useParams();
+  const ingredients = useSelector((store) => store.ingredientsBurger.data);
+  const ingredient = ingredients.find((item) => item._id === id);
   
 return (
     <div className={style.wrapper} key={ingredient._id}>
-      <img className={style.img} src={ingredient.image} alt={ingredient.name} />
-      <h2 className={style.title}>{ingredient.name}</h2>
+      <img className={style.img} src={ingredient?.image} alt={ingredient?.name} />
+      <h2 className={style.title}>{ingredient?.name}</h2>
       <ul className={style.list}>
         <li className={style.item}>
           <span className={style.category}>Калории,ккал</span>
-          <span className={style.content}>{ingredient.calories}</span>
+          <span className={style.content}>{ingredient?.calories}</span>
         </li>
         <li className={style.item}>
           <span className={style.category}>Белки, г</span>
-          <span className={style.content}>{ingredient.proteins}</span>
+          <span className={style.content}>{ingredient?.proteins}</span>
         </li>
         <li className={style.item}>
           <span className={style.category}>Жиры, г</span>
@@ -23,7 +27,7 @@ return (
         </li>
         <li className={style.item}>
           <span className={style.category}>Углеводы, г</span>
-          <span className={style.content}>{ingredient.carbohydrates}</span>
+          <span className={style.content}>{ingredient?.carbohydrates}</span>
         </li>
       </ul>
     </div>

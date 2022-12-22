@@ -200,6 +200,7 @@ export function logout() {
     .then((res) => {
       if (res.success) {
         deleteCookie('token');
+        localStorage.removeItem('jwt');
         dispatch({
           type: LOGOUT
         });
