@@ -1,0 +1,49 @@
+.wrapper {
+  composes: pt-30 pl-30 from global;
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  margin-right: auto;
+}
+
+.nav {
+  composes: pr-15 from global;
+	display: flex;
+	flex-direction: column;
+}
+
+.items {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin: 0;
+	padding: 0;
+	width: 320px;
+}
+
+.item {
+	padding: 17px 0;
+}
+
+.description {
+  composes: text text_type_main-default text_color_inactive pt-20 pb-4 from global;
+	text-align: left;
+	width: 320px;
+}
+
+.link {
+  composes: text text_type_main-medium text_color_inactive from global;
+	text-decoration: none;
+	transition: all 0.4s ease-in-out;
+}
+
+.link:hover {
+	color: var(--text-primary-color);
+}
+
+.linkActive {
+  composes: text text_type_main-medium from global;
+	color: var(--text-primary-color);
+	cursor: default;
+}

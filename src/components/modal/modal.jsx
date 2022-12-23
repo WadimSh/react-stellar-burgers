@@ -7,9 +7,9 @@ import ModalOverlay from '../modal-overlay/modal-overlay';
 
 import style from './modal.module.css';
 
-const modalRoot = document.getElementById("react-modals");
-
 function Modal({ onClose, header, children }) {
+  const modalRoot = document.getElementById("react-modals");
+  
   useEffect(() => {
     const closeEsc = (e) => {
       e.key === 'Escape' && onClose();

@@ -3,6 +3,7 @@ import {
   ADD_INGREDIENT,
   MOVE_INGREDIENT,
   DELETE_INGREDIENT,
+  CLEAN_INGREDIENT,
 } from '../actions/actions';
 
 const initialState = {
@@ -36,6 +37,12 @@ export const burgerReducer = (state = initialState, action) => {
       return {
         ...state,
         ingredients: [...state.ingredients].filter((item) => item.id !== action.id)
+      }
+    }
+    case CLEAN_INGREDIENT: {
+      return {
+        ...state,
+        ingredients: []
       }
     }
     default: {

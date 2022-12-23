@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useInView } from "react-intersection-observer";
-import { useDispatch, useSelector } from "react-redux";
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsBlock from '../burger-ingredients-block/burger-ingredients-block';
-import Modal from '../modal/modal';
-import IngredientDetails from '../ingredient-details/ingredient-details';
-import { DELETE_INGREDIENT_DATA, ADD_INGREDIENT_DATA } from '../../services/actions/actions';
 import style from './burger-ingredients.module.css';
 
 function BurgerIngredients() {
@@ -15,9 +11,6 @@ function BurgerIngredients() {
   const [sauceRef, sauceInView] = useInView();
   const [mainRef, mainInView] = useInView();
  
-  const dispatch = useDispatch();
-  const { modal } = useSelector((store) => store.ingredientData);
-
   const clickTab = (e) => {
     setCurrent(e);
     document.getElementById(e).scrollIntoView({ behavior: "smooth", block: "start" });
@@ -44,21 +37,8 @@ function BurgerIngredients() {
   },
   [bunInView, sauceInView, mainInView]);
 
-  const handleElement = (ingredient) => {
-    dispatch({ type: ADD_INGREDIENT_DATA, ingredient });
-  };
-
-  const clickButton = () => {
-    dispatch({ type: DELETE_INGREDIENT_DATA });
-  };
-
   return (
     <section className={style.section}>
-      {modal && (
-        <Modal onClose={clickButton} header={"Детали ингредиента"}>
-          <IngredientDetails />
-        </Modal>
-      )}
       <h1 className={style.title}>Соберите бургер</h1>
       <div className={style.tabs}>
         <Tab
@@ -88,19 +68,16 @@ function BurgerIngredients() {
           tabRef={bunRef}
           type="bun"
           name="Булки"
-          handleElement={handleElement}
         />
         <BurgerIngredientsBlock
           tabRef={sauceRef}
           type="sauce"
           name="Соусы"
-          handleElement={handleElement}
         />
         <BurgerIngredientsBlock
           tabRef={mainRef}
           type="main"
           name="Начинки"
-          handleElement={handleElement}
         />
       </div>
     </section>

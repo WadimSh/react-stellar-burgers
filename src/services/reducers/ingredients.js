@@ -31,7 +31,8 @@ export const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        hasError: true
+        hasError: true,
+        data: []
       }
     }
     default: {

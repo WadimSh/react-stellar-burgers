@@ -15,17 +15,15 @@ function TotalPrice({ totalPrice, clickButton }) {
           type="primary"
         />
       </div>
-        <Button
-          htmlType="button"
-          type="primary"
-          size="large"
-          onClick={clickButton}
-          disabled={logic}
-        >
-			    Оформить заказ
-			  </Button>
-      
-      
+      <Button
+        htmlType="button"
+        type="primary"
+        size="large"
+        onClick={clickButton}
+        disabled={logic}
+      >
+			  Оформить заказ
+			</Button>
     </div>
   )
 }

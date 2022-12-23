@@ -1,0 +1,18 @@
+.form {
+  composes: mb-20 from global;
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 24px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 28px;
+}
+
+.buttons {
+	margin-left: auto;
+}

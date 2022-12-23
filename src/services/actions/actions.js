@@ -7,6 +7,7 @@ export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 export const MOVE_INGREDIENT = 'MOVE_INGREDIENT';
 export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
+export const CLEAN_INGREDIENT = 'CLEAN_INGREDIENT';
 export const ADD_BUN = 'ADD_BUN';
 
 export const ADD_INGREDIENT_DATA = 'ADD_INGREDIENT_DATA';
@@ -57,3 +58,4 @@ export function postOrderBurger(order) {
       })
   }
 };
+
