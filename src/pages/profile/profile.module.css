@@ -29,7 +29,7 @@
 .description {
   composes: text text_type_main-default text_color_inactive pt-20 pb-4 from global;
 	text-align: left;
-	width: 480px;
+	width: 320px;
 }
 
 .link {
