@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, FC } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -18,7 +18,7 @@ import { Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, N
 import { getIngredientsBurger } from '../../services/actions/actions';
 import style from './App.module.css';
 
-function App() {
+const App: FC = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
