@@ -1,19 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { useInView } from "react-intersection-observer";
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsBlock from '../burger-ingredients-block/burger-ingredients-block';
 import style from './burger-ingredients.module.css';
 
-function BurgerIngredients() {
-  const [current, setCurrent] = useState("bun");
+const BurgerIngredients: FC = () => {
+  const [current, setCurrent] = useState<string>("bun");
   const [bunRef, bunInView] = useInView();
   const [sauceRef, sauceInView] = useInView();
   const [mainRef, mainInView] = useInView();
  
-  const clickTab = (e) => {
+  const clickTab = (e: string) => {
     setCurrent(e);
-    document.getElementById(e).scrollIntoView({ behavior: "smooth", block: "start" });
+    const section = document.getElementById(e) as HTMLElement;
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const handleIngredientScroll = () => {
