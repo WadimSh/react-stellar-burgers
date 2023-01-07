@@ -7,18 +7,18 @@ import { MOVE_INGREDIENT, DELETE_INGREDIENT } from '../../services/actions/actio
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from '../burger-constructor/burger-constructor.module.css';
 
-type TConstructorItems = {
+interface IConstructorItems {
   index: number, 
   item: TIngredientConstructor;
 }
 
-interface IDragItem {
+type TDragItem = {
 	index: number;
 	type: string;
 	id?: string;
 };
 
-const BurgerConstructorIngredient: FC<TConstructorItems> = ({ item, index }) => {
+const BurgerConstructorIngredient: FC<IConstructorItems> = ({ item, index }) => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLLIElement>(null);
   const { image, id, price, name } = item;
@@ -29,7 +29,7 @@ const BurgerConstructorIngredient: FC<TConstructorItems> = ({ item, index }) => 
 
   const [, drop] = useDrop({
     accept: "item",
-    hover(item: IDragItem) {
+    hover(item: TDragItem) {
       if (!ref.current) {
         return;
       }

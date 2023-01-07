@@ -13,7 +13,7 @@ import { TIngredient, TIngredientConstructor } from '../../types/types';
 import { postOrderBurger, OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL, ADD_BUN, ADD_INGREDIENT, CLEAN_INGREDIENT } from '../../services/actions/actions';
 import style from './burger-constructor.module.css';
 
-interface IDropItem {
+type TDropItem = {
 	element: TIngredientConstructor;
   _id: string;
   bun: TIngredient;
@@ -56,7 +56,7 @@ const BurgerConstructor: FC = () => {
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(item: IDropItem) {
+    drop(item: TDropItem) {
       if (item.element.type === "bun") {
         dispatch({
           type: ADD_BUN,
