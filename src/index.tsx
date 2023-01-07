@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import './index.css';
-import App from './components/app/App.jsx';
+import App from './components/app/App';
 import rootReducer from './services/reducers/root-reducer';
 import reportWebVitals from './reportWebVitals';
 

@@ -9,23 +9,23 @@ import Main from '../main/main';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import ProtectedRoute from '../protected-route/protected-route';
-
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 
+import { TLocation } from '../../types/types';
 import { getUser } from '../../services/actions/auth-actions';
 import { Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound } from '../../pages';
 import { getIngredientsBurger } from '../../services/actions/actions';
 import style from './App.module.css';
 
 const App: FC = () => {
-  const location = useLocation();
-  const dispatch = useDispatch();
+  const location = useLocation<TLocation>();
   const history = useHistory();
-
-  const { isAuth } = useSelector((store) => store.auth);
-  const isLoading = useSelector((store) => store.ingredientsBurger.isLoading);
-  const hasError = useSelector((store) => store.ingredientsBurger.hasError);
+  const dispatch: any = useDispatch();
+    
+  const { isAuth } = useSelector((store: any) => store.auth);
+  const isLoading = useSelector((store: any) => store.ingredientsBurger.isLoading);
+  const hasError = useSelector((store: any) => store.ingredientsBurger.hasError);
   const background = location.state && location.state.background;
   
   const clickButton = () => {
