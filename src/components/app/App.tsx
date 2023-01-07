@@ -21,7 +21,7 @@ import style from './App.module.css';
 const App: FC = () => {
   const location = useLocation<TLocation>();
   const history = useHistory();
-  const dispatch: any = useDispatch();
+  const dispatch = useDispatch<any>();
     
   const { isAuth } = useSelector((store: any) => store.auth);
   const isLoading = useSelector((store: any) => store.ingredientsBurger.isLoading);

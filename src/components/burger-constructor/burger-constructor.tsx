@@ -21,7 +21,7 @@ interface IDropItem {
 }
 
 const BurgerConstructor: FC = () => {
-  const dispatch: any = useDispatch();
+  const dispatch = useDispatch<any>();
   const history = useHistory();
   const { bun, ingredients } = useSelector((store: any) => store.currentBurger);
   const { isAuth } = useSelector((store: any) => store.auth);
@@ -92,7 +92,7 @@ const BurgerConstructor: FC = () => {
       )}
       {ingredients.length > 0 ? (
         <ul className={style.list}>
-        {ingredients.map((item: TIngredient, index: number) => <BurgerConstructorIngredient item={item} index={index} key={item._id} />
+        {ingredients.map((item: TIngredientConstructor, index: number) => <BurgerConstructorIngredient item={item} index={index} key={item._id} />
         )}
       </ul>
       ) : (
