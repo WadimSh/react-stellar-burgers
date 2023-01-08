@@ -1,12 +1,15 @@
 import { getCookie } from './cookie';
 
+const BASE_URL = "https://norma.nomoreparties.space/api";
+
 class Api {
-  constructor({ baseUrl }) {
+  private url: string;
+  constructor(baseUrl: string) {
     this.url = baseUrl;
   }
 
   //проверка статуса
-  _checkResponse = (res) => {
+  _checkResponse = (res: Response) => {
     if(res.ok) {
       return res.json();
     }
@@ -25,7 +28,7 @@ class Api {
   }
 
   //отправка созданного заказа
-  postOrderDetails(data) {
+  postOrderDetails(data: Array<string>) {
     return fetch(`${this.url}/orders`, {
       method: "POST",
       headers: {
@@ -38,7 +41,7 @@ class Api {
   }
 
   //востановление пароля
-  requestPassword(email) {
+  requestPassword(email: string) {
     return fetch(`${this.url}/password-reset`, {
       method: "POST",
       headers: {
@@ -52,7 +55,7 @@ class Api {
   }
 
   //сброс пароля
-  resetPassword(password, token) {
+  resetPassword(password: string, token: string) {
     return fetch(`${this.url}/password-reset/reset`, {
       method: "POST",
       headers: {
@@ -67,7 +70,7 @@ class Api {
   }
 
   //авторизация пользователя
-  authorization(email, password) {
+  authorization(email: string, password: string) {
     return fetch(`${this.url}/auth/login`, {
       method: "POST",
       headers: {
@@ -82,7 +85,7 @@ class Api {
   }
 
   //регистрация пользователя
-  registerUser(name, email, password) {
+  registerUser(name: string, email: string, password: string) {
     return fetch(`${this.url}/auth/register`, {
       method: "POST",
       headers: {
@@ -138,7 +141,7 @@ class Api {
   };
 
   //обновление данных пользователя
-  updateUser(name, email, password) {
+  updateUser(name: string, email: string, password: string) {
   return fetch(`${this.url}/auth/user`, {
     method: "PATCH",
     headers: {
@@ -155,8 +158,6 @@ class Api {
 };
 }
     
-const api = new Api({
-  baseUrl: "https://norma.nomoreparties.space/api",
-});
+const api = new Api(BASE_URL);
 
 export default api;

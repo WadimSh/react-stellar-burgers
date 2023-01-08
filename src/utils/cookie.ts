@@ -1,5 +1,8 @@
 //установка куки
-export function setCookie(name, value, props) {
+export function setCookie(name: string, value: string, props: { [key: string]: any } & { expiers?: number | Date | string }) {
+  console.log(name)
+  console.log(value)
+  console.log(props)
   props = props || {};
   let exp = props.expires;
   if (typeof exp == "number" && exp) {
@@ -23,7 +26,7 @@ export function setCookie(name, value, props) {
 }
 
 //возвращение куки
-export function getCookie(name) {
+export function getCookie(name: string): string | undefined {
   const matches = document.cookie.match(
     new RegExp(`(?:^|; )${name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1")}=([^;]*)`)
   );
@@ -31,6 +34,6 @@ export function getCookie(name) {
 }
 
 //удаление куки
-export function deleteCookie(name) {
-  setCookie(name, null, { expires: -1 });
+export function deleteCookie(name: string) {
+  setCookie(name, '', { expires: -1 });
 }
