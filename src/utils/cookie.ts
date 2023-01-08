@@ -1,8 +1,5 @@
 //установка куки
 export function setCookie(name: string, value: string, props: { [key: string]: any } & { expiers?: number | Date | string }) {
-  console.log(name)
-  console.log(value)
-  console.log(props)
   props = props || {};
   let exp = props.expires;
   if (typeof exp == "number" && exp) {
