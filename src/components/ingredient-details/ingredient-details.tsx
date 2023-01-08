@@ -1,12 +1,18 @@
+import { FC } from "react";
 import { useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 
+import { TIngredient } from '../../types/types';
 import style from './ingredient-details.module.css';
 
-function IngredientDetails() {
-  const { id } = useParams();
-  const ingredients = useSelector((store) => store.ingredientsBurger.data);
-  const ingredient = ingredients.find((item) => item._id === id);
+type TParams = {
+  id: string;
+};
+
+const IngredientDetails: FC = () => {
+  const { id } = useParams<TParams>();
+  const ingredients = useSelector((store: any) => store.ingredientsBurger.data);
+  const ingredient = ingredients.find((item: TIngredient) => item._id === id);
 
   if (!ingredient) return null;
   
