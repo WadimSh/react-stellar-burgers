@@ -1,9 +1,10 @@
+import { FC } from "react";
 import { useHistory } from 'react-router-dom';
 
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./not-found.module.css";
 
-function NotFound() {
+const NotFound: FC = () => {
   const history = useHistory();
 
   return (
