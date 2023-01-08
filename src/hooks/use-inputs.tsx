@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 
-function useInputs(inputValues) {
+function useInputs(inputValues: { [key: string]: string }) {
   const [values, setValues] = useState(inputValues);
 
-  const handleValues = (e) => {
+  const handleValues = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setValues({ ...values, [name]: value });
   };

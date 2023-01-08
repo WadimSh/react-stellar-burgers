@@ -1,7 +1,8 @@
+import { FC } from "react";
 import IngredientDetails from '../../components/ingredient-details/ingredient-details';
 import style from "./ingredients.module.css";
 
-function Ingredients() {
+const Ingredients: FC = () => {
   
   return (
     <div className={style.wrapper}>
@@ -12,6 +13,5 @@ function Ingredients() {
     </div>
   );
 }
-
 
 export default Ingredients;

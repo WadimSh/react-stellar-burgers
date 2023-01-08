@@ -1,18 +1,25 @@
+import { FC } from 'react';
 import { useSelector } from "react-redux";
-import PropTypes from 'prop-types';
 
+import { TIngredient } from '../../types/types';
 import BurgerIngredientsCard from '../burger-ingredients-card/burger-ingredients-card';
 import style from './burger-ingredients-block.module.css';
 
-function BurgerIngredientsBlock({ type, name, tabRef }) {
-  const data = useSelector((store) => store.ingredientsBurger.data);
+interface IIngredientsItems {
+  type: string;
+  name: string;
+  tabRef: any;
+}
+
+const BurgerIngredientsBlock: FC<IIngredientsItems> = ({ type, name, tabRef }) => {
+  const data = useSelector((store: any) => store.ingredientsBurger.data);
    
   return (
     <>
       <h2 className={style.title} ref={tabRef} id={type}>{name}</h2>
       <div className={style.grid}>
         {
-          data.filter(item => item.type === type).map((element, index) => (
+          data.filter((item: TIngredient) => item.type === type).map((element: TIngredient, index: number) => (
             <BurgerIngredientsCard
               element={element}
               key={element._id}
@@ -23,15 +30,6 @@ function BurgerIngredientsBlock({ type, name, tabRef }) {
       </div>
     </>
   )
-}
-
-BurgerIngredientsCard.propTypes = {
-  type: PropTypes.string,
-  name: PropTypes.string,
-  tabRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) })
-  ])
 }
 
 export default BurgerIngredientsBlock;

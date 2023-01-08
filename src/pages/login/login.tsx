@@ -1,22 +1,23 @@
-import { useCallback } from "react";
+import { useCallback, FC, FormEvent } from "react";
 import { Link, Redirect, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
+import { TLocation } from '../../types/types';
 import useInputs from '../../hooks/use-inputs';
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./login.module.css";
 import { login } from '../../services/actions/auth-actions';
 
-function Login() {
-  const location = useLocation();
-  const dispatch = useDispatch();
+const Login: FC = () => {
+  const location = useLocation<TLocation>();
+  const dispatch = useDispatch<any>();
 
-  const { isAuth } = useSelector((store) => store.auth);
+  const { isAuth } = useSelector((store: any) => store.auth);
   const { values, handleValues } = useInputs({ email: "", password: "" });
   const { from } = location.state || { from: { pathname: "/" } };
   
   const handleLogin = useCallback(
-    (e) => {
+    (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       dispatch(login(values.email, values.password));
     },

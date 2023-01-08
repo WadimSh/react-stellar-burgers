@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, FC } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import { useHistory } from 'react-router-dom';
@@ -8,16 +8,25 @@ import BurgerConstructorIngredient from '../burger-constructor-ingredient/burger
 import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
+
+import { TIngredient, TIngredientConstructor } from '../../types/types';
 import { postOrderBurger, OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL, ADD_BUN, ADD_INGREDIENT, CLEAN_INGREDIENT } from '../../services/actions/actions';
 import style from './burger-constructor.module.css';
 
-function BurgerConstructor() {
-  const dispatch = useDispatch();
+type TDropItem = {
+	element: TIngredientConstructor;
+  _id: string;
+  bun: TIngredient;
+  fillings: TIngredientConstructor[]
+}
+
+const BurgerConstructor: FC = () => {
+  const dispatch = useDispatch<any>();
   const history = useHistory();
-  const { bun, ingredients } = useSelector((store) => store.currentBurger);
-  const { isAuth } = useSelector((store) => store.auth);
-  const { modal } = useSelector((store) => store.orderNumber);
-  const [total, setTotal] = useState(0);
+  const { bun, ingredients } = useSelector((store: any) => store.currentBurger);
+  const { isAuth } = useSelector((store: any) => store.auth);
+  const { modal } = useSelector((store: any) => store.orderNumber);
+  const [total, setTotal] = useState<number>(0);
 
   const clickButton = () => {
     dispatch({ type: CLOSE_ORDER_MODAL });
@@ -25,7 +34,7 @@ function BurgerConstructor() {
   const indexIngredients = useMemo(() => [bun, ...ingredients].map((item) => item._id), [bun, ingredients]);
   
   useEffect(() => {
-    const totalPrice = ingredients.reduce((total, current) => total + current.price, bun._id ? bun.price * 2 : 0);
+    const totalPrice = ingredients.reduce((total: number, current: TIngredient) => total + current.price, bun._id ? bun.price * 2 : 0);
     setTotal(totalPrice);
   }, [bun, ingredients]);
 
@@ -47,7 +56,7 @@ function BurgerConstructor() {
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(item) {
+    drop(item: TDropItem) {
       if (item.element.type === "bun") {
         dispatch({
           type: ADD_BUN,
@@ -75,7 +84,7 @@ function BurgerConstructor() {
           type="top"
           isLocked={true}
           text={`${bun.name} (верх)`}
-          price={`${bun.price}`}
+          price={bun.price}
           thumbnail={`${bun.image}`}
         />
       </div>) : (
@@ -83,7 +92,7 @@ function BurgerConstructor() {
       )}
       {ingredients.length > 0 ? (
         <ul className={style.list}>
-        {ingredients.map((item, index) => <BurgerConstructorIngredient item={item} index={index} key={item.id} />
+        {ingredients.map((item: TIngredientConstructor, index: number) => <BurgerConstructorIngredient item={item} index={index} key={item.id} />
         )}
       </ul>
       ) : (
@@ -96,7 +105,7 @@ function BurgerConstructor() {
           type="bottom"
           isLocked={true}
           text={`${bun.name} (низ)`}
-          price={`${bun.price}`}
+          price={bun.price}
           thumbnail={`${bun.image}`}
         />
       </div>) : (

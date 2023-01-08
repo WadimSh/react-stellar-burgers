@@ -1,10 +1,14 @@
-import { useMemo } from 'react';
-import PropTypes from 'prop-types';
+import { useMemo, FC } from 'react';
 
 import { CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from './total-price.module.css';
 
-function TotalPrice({ totalPrice, clickButton }) {
+interface ITotalPrice {
+  totalPrice: number;
+  clickButton: () => void;
+}
+
+const TotalPrice: FC<ITotalPrice> = ({ totalPrice, clickButton }) => {
   const logic = useMemo(() => totalPrice === 0 ? true : false, [totalPrice]);
 
   return (
@@ -26,11 +30,6 @@ function TotalPrice({ totalPrice, clickButton }) {
 			</Button>
     </div>
   )
-}
-
-TotalPrice.propTypes = {
-  totalPrice: PropTypes.number.isRequired,
-  clickButton: PropTypes.func.isRequired
 }
 
 export default TotalPrice;

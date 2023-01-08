@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, FC, FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import useInputs from '../../../hooks/use-inputs';
@@ -6,15 +6,15 @@ import { updateUser } from '../../../services/actions/auth-actions';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './profile-form.module.css';
 
-function ProfileForm() {
-  const dispatch = useDispatch();
+const ProfileForm: FC = () => {
+  const dispatch = useDispatch<any>();
 
-  const { user } = useSelector((store) => store.auth);
+  const { user } = useSelector((store: any) => store.auth);
   const { values, handleValues, setValues } = useInputs({ name: user.name, email: user.email, password: "" });
   const [disabledButton, setDisabledButton] = useState(false);
 
   const handleUpdate = useCallback(
-    (e) => {
+    (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
     dispatch(updateUser(values.name, values.email, values.password));
     setDisabledButton(!disabledButton);

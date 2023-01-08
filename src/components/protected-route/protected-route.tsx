@@ -1,9 +1,14 @@
-import PropTypes from 'prop-types';
+import { FC, ReactNode } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-function ProtectedRoute({ children, ...rest }) {
-  const { isAuth } = useSelector((store) => store.auth);
+interface IProtectedRoute {
+  path: string;
+  children?: ReactNode;
+};
+
+const ProtectedRoute: FC<IProtectedRoute> = ({ children, ...rest }) => {
+  const { isAuth } = useSelector((store: any) => store.auth);
 
   return (
     <Route
@@ -22,9 +27,5 @@ function ProtectedRoute({ children, ...rest }) {
     />
   );
 }
-
-ProtectedRoute.propTypes = {
-  children: PropTypes.element.isRequired,
-};
 
 export default ProtectedRoute;
