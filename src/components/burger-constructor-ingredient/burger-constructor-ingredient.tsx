@@ -27,9 +27,9 @@ const BurgerConstructorIngredient: FC<IConstructorItems> = ({ item, index }) => 
     dispatch({ type: DELETE_INGREDIENT, id });
   };
 
-  const [, drop] = useDrop({
+  const [, drop] = useDrop<TDragItem>({
     accept: "item",
-    hover(item: TDragItem) {
+    hover(item) {
       if (!ref.current) {
         return;
       }

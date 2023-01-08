@@ -92,7 +92,7 @@ const BurgerConstructor: FC = () => {
       )}
       {ingredients.length > 0 ? (
         <ul className={style.list}>
-        {ingredients.map((item: TIngredientConstructor, index: number) => <BurgerConstructorIngredient item={item} index={index} key={item._id} />
+        {ingredients.map((item: TIngredientConstructor, index: number) => <BurgerConstructorIngredient item={item} index={index} key={item.id} />
         )}
       </ul>
       ) : (

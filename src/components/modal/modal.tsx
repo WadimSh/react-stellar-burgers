@@ -15,7 +15,7 @@ const Modal: FC<IModal> = ({ onClose, header, children }) => {
   const modalRoot = document.getElementById("react-modals") as HTMLElement;
   
   useEffect(() => {
-    const closeEsc = (e: { key: string; }) => {
+    const closeEsc = (e: KeyboardEvent) => {
       e.key === 'Escape' && onClose();
     }
     document.addEventListener("keyup", closeEsc);
