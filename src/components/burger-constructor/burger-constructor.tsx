@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo, FC } from 'react';
-import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import { useHistory } from 'react-router-dom';
 
@@ -9,6 +8,7 @@ import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 
+import { useSelector, useDispatch } from "../../hooks/hooks";
 import { TIngredient, TIngredientConstructor } from '../../types/types';
 import { postOrderBurger } from '../../services/actions/actions';
 import { OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL, ADD_BUN, ADD_INGREDIENT, CLEAN_INGREDIENT } from '../../services/constants';
@@ -22,11 +22,11 @@ type TDropItem = {
 }
 
 const BurgerConstructor: FC = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
   const history = useHistory();
   const { bun, ingredients } = useSelector((store: any) => store.currentBurger);
-  const { isAuth } = useSelector((store: any) => store.auth);
-  const { modal } = useSelector((store: any) => store.orderNumber);
+  const { isAuth } = useSelector((store) => store.auth);
+  const { modal } = useSelector((store) => store.orderNumber);
   const [total, setTotal] = useState<number>(0);
 
   const clickButton = () => {

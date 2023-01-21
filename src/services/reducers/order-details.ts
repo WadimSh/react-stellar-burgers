@@ -1,15 +1,25 @@
+import { TActions } from '../actions';
 import {
   GET_ORDER_NUMBER_SUCCESS,
   OPEN_ORDER_MODAL,
   CLOSE_ORDER_MODAL
 } from '../constants';
 
-const initialState = {
-  modal: false,
-  order: null
+type TInitialState = {
+  modal: boolean,
+  order: number | null,
+  isOrderLoading: boolean,
+  hasOrderError: boolean,
 };
 
-export const orderReducer = (state = initialState, action) => {
+const initialState: TInitialState = {
+  modal: false,
+  order: null,
+  isOrderLoading: false,
+  hasOrderError: false,
+};
+
+export const orderReducer = (state = initialState, action: TActions): TInitialState => {
   switch (action.type) {
     case OPEN_ORDER_MODAL: {
       return {

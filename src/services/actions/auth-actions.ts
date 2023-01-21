@@ -1,7 +1,6 @@
 import api from '../../utils/api';
 import { setCookie, deleteCookie } from '../../utils/cookie';
 import { TUser } from '../../types/types';
-
 import {
   REGISTER_USER,
   REGISTER_USER_REQUEST,
@@ -29,7 +28,7 @@ import {
   UPDATE_USER_FAILED
 } from '../constants';
 
-import { AppDispatch } from '../types';
+import { AppDispatch, AppThunk } from '../types';
 
 export interface IRegisterUser {
   readonly type: typeof REGISTER_USER;
@@ -132,8 +131,8 @@ export interface IUpdateUserFailed {
   readonly type: typeof UPDATE_USER_FAILED;
 };
 
-export function getUser() {
-  return function(dispatch: AppDispatch) {
+export const getUser: AppThunk = () => {
+  return function(dispatch) {
     dispatch({
       type: GET_USER_REQUEST
     });
@@ -163,8 +162,8 @@ export function getUser() {
   }
 };
 
-export function updateUser(name: string, email: string, password: string) {
-  return function(dispatch: AppDispatch) {
+export const updateUser:AppThunk = (name: string, email: string, password: string) => {
+  return function(dispatch) {
     dispatch({
       type: UPDATE_USER_REQUEST
     });

@@ -1,8 +1,8 @@
 import { useMemo, FC } from "react";
-import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
 import { Link, useLocation, } from "react-router-dom";
 
+import { useSelector } from "../../hooks/hooks";
 import { TIngredient } from '../../types/types';
 import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './burger-ingredients-card.module.css';

@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 
+import { useSelector } from "../../hooks/hooks";
 import { TIngredient } from '../../types/types';
 import style from './ingredient-details.module.css';
 
@@ -11,7 +11,7 @@ type TParams = {
 
 const IngredientDetails: FC = () => {
   const { id } = useParams<TParams>();
-  const ingredients = useSelector((store: any) => store.ingredientsBurger.data);
+  const ingredients = useSelector((store) => store.ingredientsBurger.data);
   const ingredient = ingredients.find((item: TIngredient) => item._id === id);
 
   if (!ingredient) return null;

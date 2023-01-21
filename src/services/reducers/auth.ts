@@ -1,3 +1,4 @@
+import { TActions } from '../actions';
 import {
   REGISTER_USER,
   REGISTER_USER_REQUEST,
@@ -25,7 +26,31 @@ import {
   UPDATE_USER_FAILED,
 } from '../constants';
 
-const initialState = {
+type TInitialState = {
+  user: {
+    name: string,
+    email: string,
+  },
+  isRegisterRequest: boolean,
+  isRegisterFailed: boolean,
+  isLoginRequest: boolean,
+  isLoginFailed: boolean,
+  isGetUserRequest: boolean,
+  isGetUserFailed: boolean,
+  isUpdateUserRequest: boolean,
+  isUpdateUserFailed: boolean,
+  isLogoutRequest: boolean,
+  isLogoutFailed: boolean,
+  isPasswordRequest: boolean,
+  isPasswordRequestFailed: boolean,
+  isPasswordResetRequest: boolean,
+  isPasswordResetFailed: boolean,
+  isTokenRequest: boolean,
+  isTokenFailed: boolean,
+  isAuth: boolean,
+};
+
+const initialState: TInitialState = {
   user: {
     name: '',
     email: '',
@@ -49,7 +74,7 @@ const initialState = {
   isAuth: false,
 };
 
-export const auth = (state = initialState, action = {}) => {
+export const auth = (state = initialState, action: TActions) => {
   switch (action.type) {
     case (REGISTER_USER): {
       return {

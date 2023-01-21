@@ -1,3 +1,5 @@
+import { TActions } from '../actions';
+import { TIngredient, TIngredientConstructor } from '../../types/types';
 import {
   ADD_BUN,
   ADD_INGREDIENT,
@@ -6,12 +8,17 @@ import {
   CLEAN_INGREDIENT,
 } from '../constants';
 
-const initialState = {
+type TInitialState = {
+  bun: TIngredient | {},
+  ingredients: TIngredientConstructor[]
+};
+
+const initialState: TInitialState = {
   bun: {},
   ingredients: []
 };
 
-export const burgerReducer = (state = initialState, action) => {
+export const burgerReducer = (state = initialState, action: TActions) => {
   switch (action.type) {
     case ADD_BUN: {
       return {

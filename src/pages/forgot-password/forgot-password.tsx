@@ -1,18 +1,18 @@
 import { useState, useCallback, FC, FormEvent, ChangeEvent } from "react";
 import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
 
+import { useSelector, useDispatch } from "../../hooks/hooks";
 import { TLocation } from '../../types/types';
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./forgot-password.module.css";
 import { requestPassword } from '../../services/actions/auth-actions';
 
 const ForgotPassword: FC = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation<TLocation>();
 
-  const { isAuth } = useSelector((store: any) => store.auth);
+  const { isAuth } = useSelector((store) => store.auth);
   const [email, setEmail] = useState<string>("");
   const { from } = location.state || { from: { pathname: "/" } };
 

@@ -1,5 +1,4 @@
 import { useEffect, FC } from 'react';
-import { useSelector, useDispatch } from "react-redux";
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
@@ -12,6 +11,7 @@ import ProtectedRoute from '../protected-route/protected-route';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 
+import { useSelector, useDispatch } from "../../hooks/hooks";
 import { TLocation } from '../../types/types';
 import { getUser } from '../../services/actions/auth-actions';
 import { Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound } from '../../pages';
@@ -21,11 +21,11 @@ import style from './App.module.css';
 const App: FC = () => {
   const location = useLocation<TLocation>();
   const history = useHistory();
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
     
-  const { isAuth } = useSelector((store: any) => store.auth);
-  const isLoading = useSelector((store: any) => store.ingredientsBurger.isLoading);
-  const hasError = useSelector((store: any) => store.ingredientsBurger.hasError);
+  const { isAuth } = useSelector((store) => store.auth);
+  const isLoading = useSelector((store) => store.ingredientsBurger.isLoading);
+  const hasError = useSelector((store) => store.ingredientsBurger.hasError);
   const background = location.state && location.state.background;
   
   const clickButton = () => {
