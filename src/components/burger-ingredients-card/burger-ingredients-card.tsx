@@ -13,7 +13,7 @@ interface IIngredientsItems {
 
 const BurgerIngredientsCard: FC<IIngredientsItems> = ({ element }) => {
   const location = useLocation();
-  const { bun, ingredients } = useSelector((store: any) => store.currentBurger);
+  const { bun, ingredients } = useSelector((store) => store.currentBurger);
  
   const [{ opacity }, dragRef] = useDrag({
     type: "ingredient",

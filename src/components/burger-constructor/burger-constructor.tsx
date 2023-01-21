@@ -24,18 +24,18 @@ type TDropItem = {
 const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { bun, ingredients } = useSelector((store: any) => store.currentBurger);
+  const { bun, ingredients } = useSelector((store) => store.currentBurger);
   const { isAuth } = useSelector((store) => store.auth);
   const { modal } = useSelector((store) => store.orderNumber);
   const [total, setTotal] = useState<number>(0);
-
+  
   const clickButton = () => {
     dispatch({ type: CLOSE_ORDER_MODAL });
   };
-  const indexIngredients = useMemo(() => [bun, ...ingredients].map((item) => item._id), [bun, ingredients]);
+  const indexIngredients = useMemo(() => bun !== null ? [bun, ...ingredients].map((item) => item._id) : [], [bun, ingredients]);
   
   useEffect(() => {
-    const totalPrice = ingredients.reduce((total: number, current: TIngredient) => total + current.price, bun._id ? bun.price * 2 : 0);
+    const totalPrice = ingredients.reduce((total: number, current: TIngredient) => total + current.price, bun !== null ? bun.price * 2 : 0);
     setTotal(totalPrice);
   }, [bun, ingredients]);
 
@@ -43,13 +43,7 @@ const BurgerConstructor: FC = () => {
     if (isAuth) {
       dispatch(postOrderBurger(indexIngredients));
       dispatch({ type: OPEN_ORDER_MODAL });
-      dispatch({
-        type: ADD_BUN,
-        data: {},
-      });
-      dispatch({
-        type: CLEAN_INGREDIENT
-      });
+      dispatch({ type: CLEAN_INGREDIENT });
     } else {
       history.push('/login');
     }
@@ -61,7 +55,7 @@ const BurgerConstructor: FC = () => {
       if (item.element.type === "bun") {
         dispatch({
           type: ADD_BUN,
-          data: { ...item.element, id: Date.now() },
+          data: item.element,
         });
       } else {
         dispatch({
@@ -79,7 +73,7 @@ const BurgerConstructor: FC = () => {
           <OrderDetails />
         </Modal>
       )}
-      {bun._id ? (
+      {bun !== null ? (
         <div className={style.bun}>
         <ConstructorElement
           type="top"
@@ -100,7 +94,7 @@ const BurgerConstructor: FC = () => {
         <div className={style.unactive}>Перетащите сюда ингредиенты</div>
       )}
       
-      {bun._id ? (
+      {bun !== null ? (
       <div className={style.bun}>
         <ConstructorElement
           type="bottom"

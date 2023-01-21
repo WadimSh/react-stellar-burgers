@@ -1,6 +1,6 @@
 import api from '../../utils/api';
 import { TIngredient, TIngredientConstructor } from '../../types/types';
-
+import { AppDispatch } from '../types';
 import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_REQUEST,
@@ -16,8 +16,6 @@ import {
   OPEN_ORDER_MODAL,
   CLOSE_ORDER_MODAL
 } from '../constants';
-
-import { AppDispatch } from '../types';
 
 export interface IGetIngredientsRequest {
   readonly type: typeof GET_INGREDIENTS_REQUEST;

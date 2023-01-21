@@ -9,12 +9,12 @@ import {
 } from '../constants';
 
 type TInitialState = {
-  bun: TIngredient | {},
+  bun: TIngredient | null,
   ingredients: TIngredientConstructor[]
 };
 
 const initialState: TInitialState = {
-  bun: {},
+  bun: null,
   ingredients: []
 };
 
@@ -49,7 +49,8 @@ export const burgerReducer = (state = initialState, action: TActions) => {
     case CLEAN_INGREDIENT: {
       return {
         ...state,
-        ingredients: []
+        ingredients: [],
+        bun: null,
       }
     }
     default: {
