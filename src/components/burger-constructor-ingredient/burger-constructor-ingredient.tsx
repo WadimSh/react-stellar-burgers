@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 
 import { TIngredientConstructor } from '../../types/types';
-import { MOVE_INGREDIENT, DELETE_INGREDIENT } from '../../services/actions/actions';
+import { MOVE_INGREDIENT, DELETE_INGREDIENT } from '../../services/constants';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from '../burger-constructor/burger-constructor.module.css';
 

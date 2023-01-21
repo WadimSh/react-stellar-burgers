@@ -10,7 +10,8 @@ import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 
 import { TIngredient, TIngredientConstructor } from '../../types/types';
-import { postOrderBurger, OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL, ADD_BUN, ADD_INGREDIENT, CLEAN_INGREDIENT } from '../../services/actions/actions';
+import { postOrderBurger } from '../../services/actions/actions';
+import { OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL, ADD_BUN, ADD_INGREDIENT, CLEAN_INGREDIENT } from '../../services/constants';
 import style from './burger-constructor.module.css';
 
 type TDropItem = {

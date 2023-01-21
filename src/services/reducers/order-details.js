@@ -2,7 +2,7 @@ import {
   GET_ORDER_NUMBER_SUCCESS,
   OPEN_ORDER_MODAL,
   CLOSE_ORDER_MODAL
-} from '../actions/actions';
+} from '../constants';
 
 const initialState = {
   modal: false,

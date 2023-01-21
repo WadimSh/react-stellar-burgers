@@ -23,7 +23,7 @@ import {
   UPDATE_USER,
   UPDATE_USER_REQUEST,
   UPDATE_USER_FAILED,
-} from '../actions/auth-actions';
+} from '../constants';
 
 const initialState = {
   user: {

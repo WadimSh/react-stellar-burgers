@@ -4,7 +4,7 @@ import {
   MOVE_INGREDIENT,
   DELETE_INGREDIENT,
   CLEAN_INGREDIENT,
-} from '../actions/actions';
+} from '../constants';
 
 const initialState = {
   bun: {},
