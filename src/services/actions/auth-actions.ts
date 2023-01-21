@@ -1,5 +1,6 @@
 import api from '../../utils/api';
 import { setCookie, deleteCookie } from '../../utils/cookie';
+import { TUser } from '../../types/types';
 
 import {
   REGISTER_USER,
@@ -28,11 +29,111 @@ import {
   UPDATE_USER_FAILED
 } from '../constants';
 
+import { AppDispatch } from '../types';
 
+export interface IRegisterUser {
+  readonly type: typeof REGISTER_USER;
+  readonly user: TUser;
+};
 
+export interface IRegisterUserRequest {
+  readonly type: typeof REGISTER_USER_REQUEST;
+};
+
+export interface IRegisterUserFailed {
+  readonly type: typeof REGISTER_USER_FAILED;
+};
+
+export interface ILoginUser {
+  readonly type: typeof LOGIN_USER;
+  readonly user: TUser;
+};
+
+export interface ILoginUserRequest {
+  readonly type: typeof LOGIN_USER_REQUEST;
+};
+
+export interface ILoginUserFailed {
+  readonly type: typeof LOGIN_USER_FAILED;
+};
+
+export interface IUpdateToken {
+  readonly type: typeof UPDATE_TOKEN;
+  readonly user: TUser;
+};
+
+export interface IUpdateTokenRequest {
+  readonly type: typeof UPDATE_TOKEN_REQUEST;
+};
+
+export interface IUpdateTokenFailed {
+  readonly type: typeof UPDATE_TOKEN_FAILED;
+};
+
+export interface ILogout {
+  readonly type: typeof LOGOUT;
+};
+
+export interface ILogoutRequest {
+  readonly type: typeof LOGOUT_REQUEST;
+};
+
+export interface ILogoutFailed {
+  readonly type: typeof LOGOUT_FAILED;
+};
+
+export interface IRequestPassword {
+  readonly type: typeof REQUEST_PASSWORD;
+};
+
+export interface IRequestPasswordRequest {
+  readonly type: typeof REQUEST_PASSWORD_REQUEST;
+};
+
+export interface IRequestPasswordFailed {
+  readonly type: typeof REQUEST_PASSWORD_FAILED;
+};
+
+export interface IResetPassword {
+  readonly type: typeof RESET_PASSWORD;
+};
+
+export interface IResetPasswordRequest {
+  readonly type: typeof RESET_PASSWORD_REQUEST;
+};
+
+export interface IResetPasswordFailed {
+  readonly type: typeof RESET_PASSWORD_FAILED;
+};
+
+export interface IGetUser {
+  readonly type: typeof GET_USER;
+  readonly user: TUser;
+};
+
+export interface IGetUserRequest {
+  readonly type: typeof GET_USER_REQUEST;
+};
+
+export interface IGetUserFailed {
+  readonly type: typeof GET_USER_FAILED;
+};
+
+export interface IUpdateUser {
+  readonly type: typeof UPDATE_USER;
+  readonly user: TUser;
+};
+
+export interface IUpdateUserRequest {
+  readonly type: typeof UPDATE_USER_REQUEST;
+};
+
+export interface IUpdateUserFailed {
+  readonly type: typeof UPDATE_USER_FAILED;
+};
 
 export function getUser() {
-  return function(dispatch) {
+  return function(dispatch: AppDispatch) {
     dispatch({
       type: GET_USER_REQUEST
     });
@@ -62,8 +163,8 @@ export function getUser() {
   }
 };
 
-export function updateUser(name, email, password) {
-  return function(dispatch) {
+export function updateUser(name: string, email: string, password: string) {
+  return function(dispatch: AppDispatch) {
     dispatch({
       type: UPDATE_USER_REQUEST
     });
@@ -87,8 +188,8 @@ export function updateUser(name, email, password) {
   }
 };
 
-export function requestPassword(email) {
-  return function(dispatch) {
+export function requestPassword(email: string) {
+  return function(dispatch: AppDispatch) {
     dispatch({
       type: REQUEST_PASSWORD_REQUEST
     });
@@ -106,8 +207,8 @@ export function requestPassword(email) {
   }
 };
 
-export function resetPassword(token, password) {
-  return function(dispatch) {
+export function resetPassword(token: string, password: string) {
+  return function(dispatch: AppDispatch) {
     dispatch({
       type: RESET_PASSWORD_REQUEST
     });
@@ -125,8 +226,8 @@ export function resetPassword(token, password) {
   }
 };
 
-export function register(name, email, password) {
-  return function(dispatch) {
+export function register(name: string, email: string, password: string) {
+  return function(dispatch: AppDispatch) {
     dispatch({ type: REGISTER_USER_REQUEST });
     api.registerUser(name, email, password)
       .then((res) => {
@@ -147,8 +248,8 @@ export function register(name, email, password) {
   }
 };
 
-export function login(email, password) {
-  return function(dispatch) {
+export function login(email: string, password: string) {
+  return function(dispatch: AppDispatch) {
     dispatch({
       type: LOGIN_USER_REQUEST
     });
@@ -172,7 +273,7 @@ export function login(email, password) {
 };
 
 export function logout() {
-  return function(dispatch) {
+  return function(dispatch: AppDispatch) {
     dispatch({
       type: LOGOUT_REQUEST
     });
@@ -196,7 +297,7 @@ export function logout() {
 
 
 export function refreshToken() {
-  return function(dispatch) {
+  return function(dispatch: AppDispatch) {
     dispatch({
       type: UPDATE_TOKEN_REQUEST
     });

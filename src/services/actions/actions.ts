@@ -21,21 +21,21 @@ import { AppDispatch } from '../types';
 
 export interface IGetIngredientsRequest {
   readonly type: typeof GET_INGREDIENTS_REQUEST;
-}
+};
 
 export interface IGetIngredientsFailed {
   readonly type: typeof GET_INGREDIENTS_FAILED;
-}
+};
 
 export interface IGetIngredientsSuccess {
   readonly type: typeof GET_INGREDIENTS_SUCCESS;
   readonly data: Array<TIngredient>;
-}
+};
 
 export interface IAddIngredient {
   readonly type: typeof ADD_INGREDIENT;
   readonly data: TIngredientConstructor;
-}
+};
 
 export interface IMoveIngredient {
   readonly type: typeof MOVE_INGREDIENT;
@@ -43,42 +43,42 @@ export interface IMoveIngredient {
     dragIndex: number;
     hoverIndex: number;
   }
-}
+};
 
 export interface IDeleteIngredient {
   readonly type: typeof DELETE_INGREDIENT;
   readonly id: string;
-}
+};
 
 export interface ICleanIngredient {
   readonly type: typeof CLEAN_INGREDIENT;
-}
+};
 
 export interface IAddBun {
   readonly type: typeof ADD_BUN;
   readonly data: TIngredient;
-}
+};
 
 export interface IGetOrderNumberSuccess {
   readonly type: typeof GET_ORDER_NUMBER_SUCCESS;
   readonly orderNumber: number;
-}
+};
 
 export interface IGetOrderNumberRequest {
   readonly type: typeof GET_ORDER_NUMBER_REQUEST;
-}
+};
 
 export interface IGetOrderNumberFailed {
   readonly type: typeof GET_ORDER_NUMBER_FAILED;
-}
+};
 
 export interface IOpenOrderModal {
   readonly type: typeof OPEN_ORDER_MODAL;
-}
+};
 
 export interface ICloseOrderModal {
   readonly type: typeof CLOSE_ORDER_MODAL;
-}
+};
 
 export function getIngredientsBurger() {
   return function(dispatch: AppDispatch) {

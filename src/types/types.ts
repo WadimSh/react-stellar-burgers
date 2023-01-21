@@ -27,4 +27,9 @@ export type TIngredient = {
 
 export type TIngredientConstructor = TIngredient & {
 	id: string;
-}
+};
+
+export type TUser = {
+  name: string;
+  email: string;
+};
