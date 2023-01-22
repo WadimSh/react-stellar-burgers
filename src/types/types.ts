@@ -54,7 +54,6 @@ export type TFeedResponse = {
 
 export type TWSActions = {
 	wsInit: string;
-	wsSendMessage: string;
 	onOpen: string;
 	onClose: string;
 	onError: string;
