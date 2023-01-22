@@ -2,10 +2,10 @@ import { TActions } from '../actions';
 import { TOrder } from '../../types/types';
 
 import {
-  WS_FEED_CONNECTION_SUCCESS,
-  WS_FEED_CONNECTION_ERROR,
-  WS_FEED_CONNECTION_CLOSED,
-  WS_FEED_GET_MESSAGE,
+  WS_ORDERS_CONNECTION_SUCCESS,
+  WS_ORDERS_CONNECTION_ERROR,
+  WS_ORDERS_CONNECTION_CLOSED,
+  WS_ORDERS_GET_MESSAGE
 } from '../constants';
 
 type TInitialState = {
@@ -24,27 +24,27 @@ const initialState: TInitialState = {
   error: null,
 };
 
-export const wsFeedReducer = (state = initialState, action: TActions) => {
+export const wsOrdersReducer = (state = initialState, action: TActions) => {
   switch (action.type) {
-    case WS_FEED_CONNECTION_SUCCESS:
+    case WS_ORDERS_CONNECTION_SUCCESS:
       return {
         ...state,
         wsConnected: true,
         error: null,
       };
-    case WS_FEED_CONNECTION_ERROR:
+    case WS_ORDERS_CONNECTION_ERROR:
       return {
         ...state,
         wsConnected: false,
         error: action.payload,
       };
-    case WS_FEED_CONNECTION_CLOSED:
+    case WS_ORDERS_CONNECTION_CLOSED:
       return {
         ...state,
         wsConnected: false,
         error: null,
       };
-    case WS_FEED_GET_MESSAGE:
+    case WS_ORDERS_GET_MESSAGE:
       return {
         ...state,
         orders: action.payload.orders,
