@@ -32,7 +32,7 @@ const BurgerConstructor: FC = () => {
   const clickButton = () => {
     dispatch({ type: CLOSE_ORDER_MODAL });
   };
-  const indexIngredients = useMemo(() => bun !== null ? [bun, ...ingredients].map((item) => item._id) : [], [bun, ingredients]);
+  const indexIngredients = useMemo(() => bun !== null ? [bun, ...ingredients].map((item) => item._id) : [...ingredients].map((item) => item._id), [bun, ingredients]);
   
   useEffect(() => {
     const totalPrice = ingredients.reduce((total: number, current: TIngredient) => total + current.price, bun !== null ? bun.price * 2 : 0);

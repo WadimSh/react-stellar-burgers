@@ -41,6 +41,22 @@ import {
   IUpdateUserFailed,
 } from './auth-actions';
 
+import {
+  IWsFeedConnectionStart,
+  IWsFeedConnectionSuccess,
+  IWsFeedConnectionError,
+  IWsFeedConnectionClosed,
+  IWsFeedGetMessage,
+} from './ws-feed-actions';
+
+import {
+  IWsOrdersConnectionStart,
+  IWsOrdersConnectionSuccess,
+  IWsOrdersConnectionError,
+  IWsOrdersConnectionClosed,
+  IWsOrdersGetMessage,
+} from './ws-orders-actions';
+
 export type TActions =
   | IGetIngredientsRequest
   | IGetIngredientsFailed
@@ -79,3 +95,13 @@ export type TActions =
   | IUpdateUser
   | IUpdateUserRequest
   | IUpdateUserFailed
+  | IWsFeedConnectionStart
+  | IWsFeedConnectionSuccess
+  | IWsFeedConnectionError
+  | IWsFeedConnectionClosed
+  | IWsFeedGetMessage
+  | IWsOrdersConnectionStart
+  | IWsOrdersConnectionSuccess
+  | IWsOrdersConnectionError
+  | IWsOrdersConnectionClosed
+  | IWsOrdersGetMessage

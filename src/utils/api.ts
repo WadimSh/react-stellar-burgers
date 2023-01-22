@@ -33,7 +33,7 @@ class Api {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${getCookie('token')}`,
+        Authorization: "Bearer " + `${getCookie('token')}`,
       },
       body: JSON.stringify({ ingredients: data }),
     })
@@ -134,7 +134,7 @@ class Api {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${getCookie('token')}`,
+        Authorization: "Bearer " + `${getCookie('token')}`,
       },
     })
     .then(res => this._checkResponse(res));
@@ -146,7 +146,7 @@ class Api {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `${getCookie('token')}`,
+      Authorization: "Bearer " + `${getCookie('token')}`,
     },
     body: JSON.stringify({
       name: name,

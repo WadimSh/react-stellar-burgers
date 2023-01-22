@@ -231,7 +231,8 @@ export function register(name: string, email: string, password: string) {
     api.registerUser(name, email, password)
       .then((res) => {
         if (res.success) {
-          setCookie('token', res.accessToken, { expires: 1200 });
+          const accessToken = res.accessToken.split("Bearer ")[1];
+          setCookie('token', accessToken, { expires: 1200 });
           localStorage.setItem('jwt', res.refreshToken);
           dispatch({
             type: REGISTER_USER,
@@ -255,7 +256,8 @@ export function login(email: string, password: string) {
     api.authorization(email, password)
     .then((res) => {
       if (res.success) {
-        setCookie('token', res.accessToken, { expires: 1200 });
+        const accessToken = res.accessToken.split("Bearer ")[1];
+        setCookie('token', accessToken, { expires: 1200 });
         localStorage.setItem('jwt', res.refreshToken);
         dispatch({
           type: LOGIN_USER,
