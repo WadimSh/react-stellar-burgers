@@ -51,3 +51,12 @@ export type TFeedResponse = {
 	total: number;
 	totalToday: number;
 }
+
+export type TWSActions = {
+	wsInit: string;
+	wsSendMessage: string;
+	onOpen: string;
+	onClose: string;
+	onError: string;
+	onMessage: string;
+}
