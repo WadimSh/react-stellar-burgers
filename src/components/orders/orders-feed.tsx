@@ -26,7 +26,7 @@ const OrdersFeed: FC = () => {
               <OrdersCard order={order} key={order._id} status={false} />
             </Link>
           );
-        }).reverse()}
+        })}
     </section>
   );
 }

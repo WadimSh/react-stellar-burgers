@@ -58,6 +58,12 @@ const App: FC = () => {
           )}
         </Main>
       </Route>
+      <Route path="/feed" exact={true}>
+        <Feed />
+      </Route>
+      <ProtectedRoute path="/profile">
+        <Profile />
+      </ProtectedRoute>
       <Route path="/login" exact={true}>
         <Login />
       </Route>
@@ -73,12 +79,7 @@ const App: FC = () => {
       <Route path="/ingredients/:id" exact={true}>
         <Ingredients />
       </Route>
-      <Route path="/feed" exact>
-        <Feed />
-      </Route>
-      <ProtectedRoute path="/profile">
-        <Profile />
-      </ProtectedRoute>
+      
       <Route>
         <NotFound />
       </Route>
@@ -90,8 +91,7 @@ const App: FC = () => {
           </Modal>
         </Route>
       )}
-
-      
+            
     </div>
   );
 }
