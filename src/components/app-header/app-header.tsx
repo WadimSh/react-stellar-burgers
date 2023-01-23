@@ -1,11 +1,14 @@
 import { FC } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
+import { useSelector } from "../../hooks/hooks";
 import style from './app-header.module.css';
 
 const AppHeader: FC = () => {
-
+  const location = useLocation();
+  const { isAuth, user } = useSelector((store: any) => store.auth);
+  
   return (
     <header className={style.header}>
       <nav className={style.nav}>
@@ -24,11 +27,11 @@ const AppHeader: FC = () => {
         <Link to="/" className={style.logo}>
           <Logo />
         </Link>
-        <NavLink exact to="/profile" className={style.link} activeClassName={style.linkActive}>
+        <NavLink exact to="/profile" className={location.pathname === "/profile/orders" ? style.linkActive : style.link} activeClassName={style.linkActive}>
           <ProfileIcon
            type="secondary"
           />
-          Личный кабинет
+          {isAuth ? `${user.name}` : "Личный кабинет"}
         </NavLink>
       </nav>
     </header>
