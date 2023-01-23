@@ -40,6 +40,7 @@ export type TOrder = {
   ingredients: Array<string>;
   _id: string;
   status: string;
+  name: string;
   number: number;
   createdAt: string;
   updatedAt: string;

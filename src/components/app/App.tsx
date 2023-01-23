@@ -14,7 +14,7 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import { useSelector, useDispatch } from "../../hooks/hooks";
 import { TLocation } from '../../types/types';
 import { getUser } from '../../services/actions/auth-actions';
-import { Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound } from '../../pages';
+import { Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound, Feed } from '../../pages';
 import { getIngredientsBurger } from '../../services/actions/actions';
 import style from './App.module.css';
 
@@ -73,6 +73,9 @@ const App: FC = () => {
       <Route path="/ingredients/:id" exact={true}>
         <Ingredients />
       </Route>
+      <Route path="/feed" exact>
+        <Feed />
+      </Route>
       <ProtectedRoute path="/profile">
         <Profile />
       </ProtectedRoute>
@@ -87,6 +90,8 @@ const App: FC = () => {
           </Modal>
         </Route>
       )}
+
+      
     </div>
   );
 }

@@ -15,7 +15,7 @@ interface IOrderCard {
 
 const OrdersCard: FC<IOrderCard> = ({ order, status }) => {
   const ingredients = useSelector((store) => store.ingredientsBurger.data);
-  const { createdAt, number } = order;
+  const { createdAt, number, name } = order;
   const arrIngredientsLength = order.ingredients.length;
   const hideIngredients = arrIngredientsLength - 6;
   const maxIngredients = 6;
@@ -46,7 +46,7 @@ const OrdersCard: FC<IOrderCard> = ({ order, status }) => {
         </p>
       </div>
       <div className={style.info}>
-        <h2 className={style.text}>Stellar бургер</h2>
+        <h2 className={style.text}>{name}</h2>
         {status && (
           <p className={style.status}>
             {order.status === "done"

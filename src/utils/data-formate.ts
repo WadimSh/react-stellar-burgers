@@ -17,5 +17,5 @@ export const dataFormat = (date: string): string => {
     ? "Вчера" : days > 1
     ? `${days} дня(-ей) назад` : "Ошибка";
     
-  return `${getDays(diffTime)}, ${hours}:${min} i-GMT+${(createdAt.getTimezoneOffset() * -1) / 60}`;
+  return `${getDays(diffTime)}, ${hours}:${min}`;
 };

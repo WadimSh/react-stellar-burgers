@@ -15,7 +15,7 @@ const AppHeader: FC = () => {
           />
           Конструктор
         </NavLink>
-        <NavLink exact to="/orders" className={style.link} activeClassName={style.linkActive}>
+        <NavLink exact to="/feed" className={style.link} activeClassName={style.linkActive}>
           <ListIcon
            type="secondary"
           />

@@ -1,13 +1,13 @@
 .wrapper {
-  composes: pt-30 pl-30 from global;
+  composes: pt-20 pl-30 from global;
   width: 100%;
-  max-width: 1250px;
+  max-width: 1240px;
   display: flex;
   margin-right: auto;
 }
 
 .nav {
-  composes: pr-15 from global;
+  composes: mt-10 pr-15 from global;
 	display: flex;
 	flex-direction: column;
 }
