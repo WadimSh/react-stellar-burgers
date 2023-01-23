@@ -31,7 +31,7 @@ const Orders: FC = () => {
               className={style.link}
               key={order._id}
             >
-              <OrdersCard order={order} key={order._id} status={false} />
+              <OrdersCard order={order} key={order._id} status={true} />
             </Link>
           );
         }).reverse()}
