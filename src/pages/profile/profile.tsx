@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Route, Switch, NavLink } from 'react-router-dom';
 
 import ProfileForm from './profile-form/profile-form';
+import Orders from '../../components/orders/orders';
 import style from "./profile.module.css";
 import { logout } from '../../services/actions/auth-actions';
 
@@ -58,7 +59,7 @@ const Profile: FC = () => {
           <ProfileForm />
         </Route>
         <Route exact path="/profile/orders">
-          Данный раздел находится в разработке.
+          <Orders />
         </Route>
       </Switch>
     </section>

@@ -1,7 +1,7 @@
 .wrapper {
   composes: pt-30 pl-30 from global;
   width: 100%;
-  max-width: 860px;
+  max-width: 1250px;
   display: flex;
   margin-right: auto;
 }
