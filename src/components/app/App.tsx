@@ -28,7 +28,7 @@ const App: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const background = location.state && location.state.background;
-
+  
   const { isAuth } = useSelector((store) => store.auth);
   const isLoading = useSelector((store) => store.ingredientsBurger.isLoading);
   const hasError = useSelector((store) => store.ingredientsBurger.hasError);

@@ -15,15 +15,14 @@ const OrdersDetail: FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
   const location = useLocation<TLocation>();
-  const background = location.state && location.state.background;
-
+  const background = location.state?.background;
   const profile = useRouteMatch({ path: '/profile/orders/:id' });
-  
+  console.log(location)
   const ingredients = useSelector((store) => store.ingredientsBurger.data);
   const feedOrders = useSelector((store) => store.wsFeed.orders);
   const profileOrders = useSelector((store) => store.wsOrders.orders);
 
-  let orders = profile ? profileOrders : feedOrders;
+  let orders = profile !== null ? profileOrders : feedOrders;
   let order = orders.find((order) => order._id === id);
 
   const orderIngredients = useMemo(() => {
@@ -48,10 +47,10 @@ const OrdersDetail: FC = () => {
 
   useEffect(() => {
     if (!order) {
-       dispatch(profile ? wsOrdersConnectionStart() : wsFeedConnectionStart());
+      dispatch(profile !== null ? wsOrdersConnectionStart() : wsFeedConnectionStart());
       }
     return () => {
-      dispatch(profile ? wsOrdersConnectionClosed() : wsFeedConnectionClosed());
+      dispatch(profile !== null ? wsOrdersConnectionClosed() : wsFeedConnectionClosed());
       }
   }, [dispatch, order]);
 

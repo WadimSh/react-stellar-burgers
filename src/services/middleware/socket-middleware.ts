@@ -5,10 +5,10 @@ import { TWSActions } from "../../types/types";
 export const socketMiddleware = (wsUrl: string, wsActions: TWSActions, isAuth: boolean ): Middleware => {
 	return (store: MiddlewareAPI) => {
 		let socket: WebSocket | null = null;
-
+		
 		return next => action => {
 			const { dispatch } = store;
-			const { type } = action;
+			const { type, payload } = action;
 			const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
 			const accessToken = getCookie('token')
 
@@ -19,7 +19,12 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWSActions, isAuth: b
 					socket = new WebSocket(`${wsUrl}?token=${accessToken}`);
 				}
 			}
+			
 			if (socket) {
+				if (type === onClose) {
+          socket.close();
+        }
+
 				socket.onopen = event => {
 					dispatch({ type: onOpen, payload: event });
 				};
@@ -36,7 +41,7 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWSActions, isAuth: b
 					dispatch({ type: onMessage, payload: restParsedData });
 				};
 
-				socket.onclose = (event: CloseEvent) => {
+				socket.onclose = event => {
 					dispatch({ type: onClose, payload: event });
 				};
 			}

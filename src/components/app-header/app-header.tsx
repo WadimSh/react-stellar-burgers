@@ -8,7 +8,7 @@ import style from './app-header.module.css';
 
 const AppHeader: FC = () => {
   const location = useLocation<TLocation>();
-  const { isAuth, user } = useSelector((store: any) => store.auth);
+  const { isAuth, user } = useSelector((store) => store.auth);
   
   return (
     <header className={style.header}>

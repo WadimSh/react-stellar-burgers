@@ -1,14 +1,14 @@
 import { FC } from "react";
-import { useDispatch } from 'react-redux';
 import { Route, Switch, NavLink } from 'react-router-dom';
 
+import { useDispatch } from '../../hooks/hooks';
 import ProfileForm from './profile-form/profile-form';
 import Orders from '../../components/orders/orders';
 import style from "./profile.module.css";
 import { logout } from '../../services/actions/auth-actions';
 
 const Profile: FC = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
