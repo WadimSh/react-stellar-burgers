@@ -1,7 +1,7 @@
-import { useEffect, FC } from 'react';
+import { useEffect, FC, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory, useRouteMatch } from 'react-router-dom';
 
 import AppHeader from '../app-header/app-header';
 import Main from '../main/main';
@@ -10,28 +10,50 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import ProtectedRoute from '../protected-route/protected-route';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import OrdersDetail from '../orders/orders-detail/orders-detail';
+import { Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound, Feed } from '../../pages';
 
 import { useSelector, useDispatch } from "../../hooks/hooks";
 import { TLocation } from '../../types/types';
 import { getUser } from '../../services/actions/auth-actions';
-import { Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound, Feed } from '../../pages';
 import { getIngredientsBurger } from '../../services/actions/actions';
 import style from './App.module.css';
+
+type TUseRouteMatch = {
+  [id: string]: string | undefined
+}
 
 const App: FC = () => {
   const location = useLocation<TLocation>();
   const history = useHistory();
   const dispatch = useDispatch();
-    
+  const background = location.state && location.state.background;
+
   const { isAuth } = useSelector((store) => store.auth);
   const isLoading = useSelector((store) => store.ingredientsBurger.isLoading);
   const hasError = useSelector((store) => store.ingredientsBurger.hasError);
-  const background = location.state && location.state.background;
+  const profileFeed = useSelector((store) => store.wsFeed.orders);
+  const profileOrders = useSelector((store) => store.wsOrders.orders);
+
+  const [orderNumber, setOrderNumber] = useState<number | undefined>(0);
+  const id = useRouteMatch<TUseRouteMatch>(["/feed/:id"])?.params?.id;
+  const idOrder = useRouteMatch<TUseRouteMatch>(["/profile/orders/:id"])?.params?.id;
+  
+  useEffect(() => {
+    if (id !== undefined) {
+      const order = profileFeed.find((order) => order._id === id);
+      setOrderNumber(order?.number)
+    }
+    if (idOrder !== undefined) {
+      const order = profileOrders.find((order) => order._id === idOrder);
+      setOrderNumber(order?.number)
+    }
+  }, [location]);
   
   const clickButton = () => {
     history.goBack();
   };
-  
+
   useEffect(() => {
     dispatch(getIngredientsBurger());
   }, [dispatch]);
@@ -79,7 +101,12 @@ const App: FC = () => {
       <Route path="/ingredients/:id" exact={true}>
         <Ingredients />
       </Route>
-      
+      <Route path="/feed/:id" exact={true}>
+        <OrdersDetail />
+      </Route>
+      <ProtectedRoute path="/profile/orders/:id">
+        <OrdersDetail />
+      </ProtectedRoute>
       <Route>
         <NotFound />
       </Route>
@@ -91,7 +118,20 @@ const App: FC = () => {
           </Modal>
         </Route>
       )}
-            
+      {background && (
+        <Route path="/feed/:id">
+          <Modal onClose={clickButton} header={`#${orderNumber}`}>
+            <OrdersDetail />
+          </Modal>
+        </Route>
+      )}
+      {background && (
+        <ProtectedRoute path="/profile/orders/:id">
+          <Modal onClose={clickButton} header={`#${orderNumber}`}>
+            <OrdersDetail />
+          </Modal>
+        </ProtectedRoute>
+      )}
     </div>
   );
 }

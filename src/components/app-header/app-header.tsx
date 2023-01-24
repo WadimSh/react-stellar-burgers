@@ -3,10 +3,11 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { useSelector } from "../../hooks/hooks";
+import { TLocation } from '../../types/types';
 import style from './app-header.module.css';
 
 const AppHeader: FC = () => {
-  const location = useLocation();
+  const location = useLocation<TLocation>();
   const { isAuth, user } = useSelector((store: any) => store.auth);
   
   return (
