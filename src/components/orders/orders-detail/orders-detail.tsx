@@ -4,8 +4,9 @@ import { useLocation, useParams, useRouteMatch } from "react-router-dom";
 import { useSelector, useDispatch } from "../../../hooks/hooks";
 import { wsFeedConnectionClosed, wsFeedConnectionStart } from "../../../services/actions/ws-feed-actions";
 import { wsOrdersConnectionClosed, wsOrdersConnectionStart } from "../../../services/actions/ws-orders-actions";
-import { TLocation } from "../../../types/types";
+import { TLocation, TIngredient } from "../../../types/types";
 
+import OrdersIngredients from "../orders-ingredients/orders-ingredients";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { dataFormat } from "../../../utils/data-formate";
 import style from "./orders-detail.module.css";
@@ -72,7 +73,7 @@ const OrdersDetail: FC = () => {
           )}
           <h3 className={style.caption}>Состав:</h3>
           <div>
-            Компонент детализации заказа.
+          <OrdersIngredients details={orderIngredients as Array<TIngredient>} />
           </div>
           <div className={style.total}>
             <p className={style.totalLabel}>{dataFormat(order.createdAt)}</p>
