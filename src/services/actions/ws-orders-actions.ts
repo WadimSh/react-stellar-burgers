@@ -29,6 +29,12 @@ export interface IWsOrdersGetMessage {
   readonly payload: TFeedResponse
 };
 
+export type TOrdersActions =
+  | IWsOrdersConnectionStart
+  | IWsOrdersConnectionSuccess
+  | IWsOrdersConnectionError
+  | IWsOrdersConnectionClosed
+  | IWsOrdersGetMessage
 
 export const wsOrdersConnectionStart = (): IWsOrdersConnectionStart => {
 	return { type: WS_ORDERS_CONNECTION_START }

@@ -1,4 +1,4 @@
-import { TActions } from '../actions';
+import { TOrdersActions } from '../actions/ws-orders-actions';
 import { TOrder } from '../../types/types';
 
 import {
@@ -24,7 +24,7 @@ const initialState: TInitialState = {
   error: null,
 };
 
-export const wsOrdersReducer = (state = initialState, action: TActions) => {
+export const wsOrdersReducer = (state = initialState, action: TOrdersActions) => {
   switch (action.type) {
     case WS_ORDERS_CONNECTION_SUCCESS:
       return {

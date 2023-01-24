@@ -29,7 +29,13 @@ export interface IWsFeedGetMessage {
   readonly payload: TFeedResponse
 };
 
-
+export type TFeedActions =
+  | IWsFeedConnectionStart
+  | IWsFeedConnectionSuccess
+  | IWsFeedConnectionError
+  | IWsFeedConnectionClosed
+  | IWsFeedGetMessage
+  
 export const wsFeedConnectionStart = (): IWsFeedConnectionStart => {
 	return { type: WS_FEED_CONNECTION_START }
 };

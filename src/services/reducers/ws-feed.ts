@@ -1,4 +1,4 @@
-import { TActions } from '../actions';
+import { TFeedActions } from '../actions/ws-feed-actions';
 import { TOrder } from '../../types/types';
 
 import {
@@ -24,7 +24,7 @@ const initialState: TInitialState = {
   error: null,
 };
 
-export const wsFeedReducer = (state = initialState, action: TActions) => {
+export const wsFeedReducer = (state = initialState, action: TFeedActions) => {
   switch (action.type) {
     case WS_FEED_CONNECTION_SUCCESS:
       return {
