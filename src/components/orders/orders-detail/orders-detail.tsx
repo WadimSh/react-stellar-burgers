@@ -17,6 +17,8 @@ const OrdersDetail: FC = () => {
   const location = useLocation<TLocation>();
   const background = location.state?.background;
   const profile = useRouteMatch({ path: '/profile/orders/:id' });
+  //const match = useRouteMatch();
+  //.log(match.path, match.url)
   
   const ingredients = useSelector((store) => store.ingredientsBurger.data);
   const feedOrders = useSelector((store) => store.wsFeed.orders);

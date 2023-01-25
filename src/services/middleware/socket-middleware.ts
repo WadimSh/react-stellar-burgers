@@ -8,7 +8,7 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWSActions, isAuth: b
 		
 		return next => action => {
 			const { dispatch } = store;
-			const { type, payload } = action;
+			const { type } = action;
 			const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
 			const accessToken = getCookie('token')
 

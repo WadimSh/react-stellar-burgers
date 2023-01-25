@@ -10,7 +10,7 @@ interface IProtectedRoute {
 
 const ProtectedRoute: FC<IProtectedRoute> = ({ children, ...rest }) => {
   const { isAuth } = useSelector((store) => store.auth);
-  
+  console.log(isAuth)
   return (
     <Route
       {...rest}
