@@ -1,4 +1,4 @@
-import { TActions } from '../actions';
+import { TActions } from '../actions/actions';
 import { TIngredient } from '../../types/types';
 import {
   GET_INGREDIENTS_REQUEST,

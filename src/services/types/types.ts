@@ -1,9 +1,10 @@
 import { ThunkAction } from 'redux-thunk';
 import { Action, ActionCreator } from 'redux';
-import { TActions } from '../actions';
+import { TActions } from '../actions/actions';
+import { TAuthActions } from '../actions/auth-actions';
 import store from '../..';
 
-type TApplicationActions = TActions;
+type TApplicationActions = TActions | TAuthActions;
 
 export type TRootState = ReturnType<typeof store.getState>;
 

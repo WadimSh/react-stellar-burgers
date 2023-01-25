@@ -131,6 +131,32 @@ export interface IUpdateUserFailed {
   readonly type: typeof UPDATE_USER_FAILED;
 };
 
+export type TAuthActions =
+  | IRegisterUser
+  | IRegisterUserRequest
+  | IRegisterUserFailed
+  | ILoginUser
+  | ILoginUserRequest
+  | ILoginUserFailed
+  | IUpdateToken
+  | IUpdateTokenRequest
+  | IUpdateTokenFailed
+  | ILogout
+  | ILogoutRequest
+  | ILogoutFailed
+  | IRequestPassword
+  | IRequestPasswordRequest
+  | IRequestPasswordFailed
+  | IResetPassword
+  | IResetPasswordRequest
+  | IResetPasswordFailed
+  | IGetUser
+  | IGetUserRequest
+  | IGetUserFailed
+  | IUpdateUser
+  | IUpdateUserRequest
+  | IUpdateUserFailed
+
 export const getUser: AppThunk = () => {
   return function(dispatch) {
     dispatch({
@@ -295,7 +321,6 @@ export function logout() {
     });
   }
 };
-
 
 export function refreshToken() {
   return function(dispatch: AppDispatch) {

@@ -1,4 +1,4 @@
-import { TActions } from '../actions';
+import { TAuthActions } from '../actions/auth-actions';
 import {
   REGISTER_USER,
   LOGIN_USER,
@@ -23,7 +23,7 @@ const initialState: TInitialState = {
   isAuth: false,
 };
 
-export const auth = (state = initialState, action: TActions) => {
+export const auth = (state = initialState, action: TAuthActions) => {
   switch (action.type) {
     case (REGISTER_USER): {
       return {

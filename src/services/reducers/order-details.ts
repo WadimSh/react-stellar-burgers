@@ -1,4 +1,4 @@
-import { TActions } from '../actions';
+import { TActions } from '../actions/actions';
 import {
   GET_ORDER_NUMBER_SUCCESS,
   OPEN_ORDER_MODAL,

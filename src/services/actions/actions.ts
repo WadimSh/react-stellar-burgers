@@ -78,6 +78,21 @@ export interface ICloseOrderModal {
   readonly type: typeof CLOSE_ORDER_MODAL;
 };
 
+export type TActions =
+  | IGetIngredientsRequest
+  | IGetIngredientsFailed
+  | IGetIngredientsSuccess
+  | IAddIngredient
+  | IMoveIngredient
+  | IDeleteIngredient
+  | ICleanIngredient
+  | IAddBun
+  | IGetOrderNumberSuccess
+  | IGetOrderNumberRequest
+  | IGetOrderNumberFailed
+  | IOpenOrderModal
+  | ICloseOrderModal
+
 export function getIngredientsBurger() {
   return function(dispatch: AppDispatch) {
     dispatch({

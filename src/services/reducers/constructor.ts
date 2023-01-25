@@ -1,4 +1,4 @@
-import { TActions } from '../actions';
+import { TActions } from '../actions/actions';
 import { TIngredient, TIngredientConstructor } from '../../types/types';
 import {
   ADD_BUN,
