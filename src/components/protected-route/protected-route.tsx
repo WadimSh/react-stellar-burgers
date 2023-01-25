@@ -1,20 +1,20 @@
-import { FC, ReactNode } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { FC, useEffect } from 'react';
+import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { getUser } from '../../services/actions/auth-actions';
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 
-import { useAppSelector } from "../../hooks/hooks";
+const ProtectedRoute: FC<RouteProps> = ({ children, ...rest }) => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+      dispatch(getUser())
+  }, []);
 
-interface IProtectedRoute {
-  path: string;
-  children?: ReactNode;
-};
-
-const ProtectedRoute: FC<IProtectedRoute> = ({ children, ...rest }) => {
   const { isAuth } = useAppSelector((store) => store.auth);
   console.log(isAuth)
   return (
     <Route
       {...rest}
-      render={({ location }) => (isAuth
+      render={({ location }): any => (isAuth
           ? (children)
           : (
             <Redirect to={{

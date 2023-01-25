@@ -62,8 +62,8 @@ const App: FC = () => {
     if (!isAuth && localStorage.getItem('jwt')) {
       dispatch(getUser());
     }
-  }, []);
-  console.log(isAuth)
+  }, [dispatch]);
+  
   return (
     <div className={style.App}>
       <AppHeader />
@@ -83,7 +83,10 @@ const App: FC = () => {
       <Route path="/feed" exact={true}>
         <Feed />
       </Route>
-      <ProtectedRoute path="/profile">
+      <ProtectedRoute path="/profile" exact={true}>
+        <Profile />
+      </ProtectedRoute>
+      <ProtectedRoute path="/profile/orders" exact={true}>
         <Profile />
       </ProtectedRoute>
       <Route path="/login" exact={true}>
@@ -104,7 +107,7 @@ const App: FC = () => {
       <Route path="/feed/:id" exact={true}>
         <OrdersDetail />
       </Route>
-      <ProtectedRoute path="/profile/orders/:id">
+      <ProtectedRoute path="/profile/orders/:id" exact={true}>
         <OrdersDetail />
       </ProtectedRoute>
       <Route>
@@ -126,7 +129,7 @@ const App: FC = () => {
         </Route>
       )}
       {background && idOrder && (
-        <ProtectedRoute path="/profile/orders/:id">
+        <ProtectedRoute path="/profile/orders/:id" exact={true}>
           <Modal onClose={clickButton} header={`#${orderNumber}`}>
             <OrdersDetail />
           </Modal>
