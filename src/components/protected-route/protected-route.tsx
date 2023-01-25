@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { useSelector } from "../../hooks/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 
 interface IProtectedRoute {
   path: string;
@@ -9,7 +9,7 @@ interface IProtectedRoute {
 };
 
 const ProtectedRoute: FC<IProtectedRoute> = ({ children, ...rest }) => {
-  const { isAuth } = useSelector((store) => store.auth);
+  const { isAuth } = useAppSelector((store) => store.auth);
   console.log(isAuth)
   return (
     <Route

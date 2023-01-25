@@ -1,7 +1,7 @@
 import { useMemo, FC } from "react";
 
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "../../../hooks/hooks";
+import { useAppSelector } from "../../../hooks/hooks";
 import OrdersImg from "../orders-img/orders-img";
 import { dataFormat } from "../../../utils/data-formate";
 import style from "./orders-card.module.css";
@@ -14,7 +14,7 @@ interface IOrderCard {
 }
 
 const OrdersCard: FC<IOrderCard> = ({ order, status }) => {
-  const ingredients = useSelector((store) => store.ingredientsBurger.data);
+  const ingredients = useAppSelector((store) => store.ingredientsBurger.data);
   const { createdAt, number, name } = order;
   const arrIngredientsLength = order.ingredients.length;
   const hideIngredients = arrIngredientsLength - 6;

@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { useSelector } from "../../hooks/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 import OrdersCard from "./orders-card/orders-card";
 import style from "./orders.module.css";
 
 const OrdersFeed: FC = () => {
   const location = useLocation();
-  const { orders } = useSelector((store) => store.wsFeed);
+  const { orders } = useAppSelector((store) => store.wsFeed);
   
   
   return (

@@ -1,16 +1,16 @@
 import { FC, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { useSelector, useDispatch } from "../../hooks/hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { wsOrdersConnectionClosed, wsOrdersConnectionStart } from "../../services/actions/ws-orders-actions";
 
 import OrdersCard from "./orders-card/orders-card";
 import style from "./orders.module.css";
 
 const Orders: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const location = useLocation();
-  const { orders } = useSelector((store) => store.wsOrders);
+  const { orders } = useAppSelector((store) => store.wsOrders);
   useEffect(() => {
     dispatch(wsOrdersConnectionStart());
     return () => {

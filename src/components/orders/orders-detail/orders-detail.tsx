@@ -1,7 +1,7 @@
 import { FC, useEffect, useMemo } from "react";
 import { useLocation, useParams, useRouteMatch } from "react-router-dom";
 
-import { useSelector, useDispatch } from "../../../hooks/hooks";
+import { useAppSelector, useAppDispatch } from "../../../hooks/hooks";
 import { wsFeedConnectionClosed, wsFeedConnectionStart } from "../../../services/actions/ws-feed-actions";
 import { wsOrdersConnectionClosed, wsOrdersConnectionStart } from "../../../services/actions/ws-orders-actions";
 import { TLocation, TIngredient } from "../../../types/types";
@@ -12,7 +12,7 @@ import { dataFormat } from "../../../utils/data-formate";
 import style from "./orders-detail.module.css";
 
 const OrdersDetail: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
   const location = useLocation<TLocation>();
   const background = location.state?.background;
@@ -20,9 +20,9 @@ const OrdersDetail: FC = () => {
   //const match = useRouteMatch();
   //.log(match.path, match.url)
   
-  const ingredients = useSelector((store) => store.ingredientsBurger.data);
-  const feedOrders = useSelector((store) => store.wsFeed.orders);
-  const profileOrders = useSelector((store) => store.wsOrders.orders);
+  const ingredients = useAppSelector((store) => store.ingredientsBurger.data);
+  const feedOrders = useAppSelector((store) => store.wsFeed.orders);
+  const profileOrders = useAppSelector((store) => store.wsOrders.orders);
 
   let orders = profile !== null ? profileOrders : feedOrders;
   let order = orders.find((order) => order._id === id);

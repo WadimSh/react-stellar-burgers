@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
-import { useSelector } from "../../hooks/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 import style from './order-details.module.css';
 import done from '../../images/done.png';
 
 const OrderDetails: FC = () => {
-const orderNumber = useSelector((store) => store.orderNumber.order);
+const orderNumber = useAppSelector((store) => store.orderNumber.order);
 
 return (
   <div className={style.wrapper}>

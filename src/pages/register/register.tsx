@@ -1,7 +1,7 @@
 import { useCallback, FC, FormEvent } from "react";
 import { Link, Redirect, useLocation } from "react-router-dom";
 
-import { useSelector, useDispatch } from "../../hooks/hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { TLocation } from '../../types/types';
 import useInputs from '../../hooks/use-inputs';
 import { Input, EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -9,10 +9,10 @@ import style from "./register.module.css";
 import { register } from '../../services/actions/auth-actions';
 
 const Register: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const location = useLocation<TLocation>();
 
-  const { isAuth } = useSelector((store) => store.auth);
+  const { isAuth } = useAppSelector((store) => store.auth);
   const { values, handleValues } = useInputs({ name: "", email: "", password: "" });
   const { from } = location.state || { from: { pathname: "/" } };
   

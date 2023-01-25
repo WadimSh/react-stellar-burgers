@@ -1,7 +1,7 @@
 import { useCallback, FC, FormEvent } from "react";
 import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 
-import { useSelector, useDispatch } from "../../hooks/hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { TLocation } from '../../types/types';
 import useInputs from '../../hooks/use-inputs';
 import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -9,11 +9,11 @@ import style from "./reset-password.module.css";
 import { resetPassword } from '../../services/actions/auth-actions';
 
 const ResetPassword: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const history = useHistory();
   const location = useLocation<TLocation>();
 
-  const { isAuth } = useSelector((store) => store.auth);
+  const { isAuth } = useAppSelector((store) => store.auth);
   const { values, handleValues } = useInputs({ password: "", token: "" });
   const { from } = location.state || { from: { pathname: "/" } };
 

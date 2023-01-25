@@ -13,7 +13,7 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrdersDetail from '../orders/orders-detail/orders-detail';
 import { Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound, Feed } from '../../pages';
 
-import { useSelector, useDispatch } from "../../hooks/hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { TLocation } from '../../types/types';
 import { getUser } from '../../services/actions/auth-actions';
 import { getIngredientsBurger } from '../../services/actions/actions';
@@ -26,14 +26,14 @@ type TUseRouteMatch = {
 const App: FC = () => {
   const location = useLocation<TLocation>();
   const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const background = location.state && location.state.background;
     
-  const { isAuth } = useSelector((store) => store.auth);
-  const isLoading = useSelector((store) => store.ingredientsBurger.isLoading);
-  const hasError = useSelector((store) => store.ingredientsBurger.hasError);
-  const profileFeed = useSelector((store) => store.wsFeed.orders);
-  const profileOrders = useSelector((store) => store.wsOrders.orders);
+  const { isAuth } = useAppSelector((store) => store.auth);
+  const isLoading = useAppSelector((store) => store.ingredientsBurger.isLoading);
+  const hasError = useAppSelector((store) => store.ingredientsBurger.hasError);
+  const profileFeed = useAppSelector((store) => store.wsFeed.orders);
+  const profileOrders = useAppSelector((store) => store.wsOrders.orders);
 
   const [orderNumber, setOrderNumber] = useState<number | undefined>(0);
   const id = useRouteMatch<TUseRouteMatch>(["/feed/:id"])?.params?.id;

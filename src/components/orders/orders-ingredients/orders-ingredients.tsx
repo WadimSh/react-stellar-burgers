@@ -1,6 +1,6 @@
 import { FC, useMemo } from "react";
 
-import { useSelector } from "../../../hooks/hooks";
+import { useAppSelector } from "../../../hooks/hooks";
 import { TIngredient } from "../../../types/types";
 
 import OrdersImg from "../orders-img/orders-img";
@@ -12,7 +12,7 @@ interface IOrderDetails {
 }
 
 const OrdersIngredients: FC<IOrderDetails> = ({ details }) => {
-  const ingredients = useSelector((store) => store.ingredientsBurger.data);
+  const ingredients = useAppSelector((store) => store.ingredientsBurger.data);
   
   const count = (elem: object) => {
     let count = details.filter((item) => {

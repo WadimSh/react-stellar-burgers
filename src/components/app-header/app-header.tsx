@@ -2,13 +2,13 @@ import { FC } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { useSelector } from "../../hooks/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 import { TLocation } from '../../types/types';
 import style from './app-header.module.css';
 
 const AppHeader: FC = () => {
   const location = useLocation<TLocation>();
-  const { isAuth, user } = useSelector((store) => store.auth);
+  const { isAuth, user } = useAppSelector((store) => store.auth);
   
   return (
     <header className={style.header}>

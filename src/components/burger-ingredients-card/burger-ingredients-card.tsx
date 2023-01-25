@@ -2,7 +2,7 @@ import { useMemo, FC } from "react";
 import { useDrag } from "react-dnd";
 import { Link, useLocation, } from "react-router-dom";
 
-import { useSelector } from "../../hooks/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 import { TIngredient } from '../../types/types';
 import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './burger-ingredients-card.module.css';
@@ -13,7 +13,7 @@ interface IIngredientsItems {
 
 const BurgerIngredientsCard: FC<IIngredientsItems> = ({ element }) => {
   const location = useLocation();
-  const { bun, ingredients } = useSelector((store) => store.currentBurger);
+  const { bun, ingredients } = useAppSelector((store) => store.currentBurger);
  
   const [{ opacity }, dragRef] = useDrag({
     type: "ingredient",

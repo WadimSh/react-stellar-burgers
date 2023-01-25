@@ -1,11 +1,11 @@
 import { FC } from 'react'
 
-import { useSelector } from "../../../hooks/hooks";
+import { useAppSelector } from "../../../hooks/hooks";
 import { ordersFilter } from "../../../utils/orders-filter";
 import style from "./orders-stat.module.css";
 
 const OrdersStat: FC = () => {
-  const { total, totalToday, orders } = useSelector((store) => store.wsFeed);
+  const { total, totalToday, orders } = useAppSelector((store) => store.wsFeed);
 
   const statusArrays = ordersFilter(orders);
   const doneStatusOrder = statusArrays?.done.slice(0, 30);

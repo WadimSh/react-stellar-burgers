@@ -8,7 +8,7 @@ import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 
-import { useSelector, useDispatch } from "../../hooks/hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { TIngredient, TIngredientConstructor } from '../../types/types';
 import { postOrderBurger } from '../../services/actions/actions';
 import { OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL, ADD_BUN, ADD_INGREDIENT, CLEAN_INGREDIENT } from '../../services/constants';
@@ -22,11 +22,11 @@ type TDropItem = {
 }
 
 const BurgerConstructor: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const history = useHistory();
-  const { bun, ingredients } = useSelector((store) => store.currentBurger);
-  const { isAuth } = useSelector((store) => store.auth);
-  const { modal } = useSelector((store) => store.orderNumber);
+  const { bun, ingredients } = useAppSelector((store) => store.currentBurger);
+  const { isAuth } = useAppSelector((store) => store.auth);
+  const { modal } = useAppSelector((store) => store.orderNumber);
   const [total, setTotal] = useState<number>(0);
   
   const clickButton = () => {

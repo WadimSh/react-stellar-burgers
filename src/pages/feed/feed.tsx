@@ -1,6 +1,6 @@
 import { useEffect, FC } from "react";
 
-import { useDispatch } from "../../hooks/hooks";
+import { useAppDispatch } from "../../hooks/hooks";
 import { wsFeedConnectionClosed, wsFeedConnectionStart } from "../../services/actions/ws-feed-actions";
 
 import OrdersFeed from "../../components/orders/orders-feed";
@@ -8,7 +8,7 @@ import OrdersStat from "../../components/orders/orders-stat/orders-stat";
 import style from "./feed.module.css";
 
 export const Feed: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   
   useEffect(() => {
     dispatch(wsFeedConnectionStart());

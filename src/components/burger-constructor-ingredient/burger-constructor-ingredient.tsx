@@ -1,7 +1,7 @@
 import { useRef, FC } from "react";
 import { useDrag, useDrop } from "react-dnd";
 
-import { useDispatch } from "../../hooks/hooks";
+import { useAppDispatch } from "../../hooks/hooks";
 import { TIngredientConstructor } from '../../types/types';
 import { MOVE_INGREDIENT, DELETE_INGREDIENT } from '../../services/constants';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -19,7 +19,7 @@ type TDragItem = {
 };
 
 const BurgerConstructorIngredient: FC<IConstructorItems> = ({ item, index }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const ref = useRef<HTMLLIElement>(null);
   const { image, id, price, name } = item;
   
