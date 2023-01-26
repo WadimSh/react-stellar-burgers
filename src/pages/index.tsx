@@ -5,6 +5,7 @@ import ForgotPassword from './forgot-password/forgot-password';
 import Register from './register/register';
 import Login from './login/login';
 import Ingredients from './ingredients/ingredients';
+import Feed from './feed/feed';
 
 export {
   Login,
@@ -13,5 +14,6 @@ export {
   ResetPassword,
   Profile,
   Ingredients,
-  NotFound
+  NotFound,
+  Feed
 };

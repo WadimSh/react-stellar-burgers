@@ -1,20 +1,14 @@
-import { FC, ReactNode } from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { FC } from 'react';
+import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { useAppSelector } from "../../hooks/hooks";
 
-interface IProtectedRoute {
-  path: string;
-  children?: ReactNode;
-};
-
-const ProtectedRoute: FC<IProtectedRoute> = ({ children, ...rest }) => {
-  const { isAuth } = useSelector((store: any) => store.auth);
-
+const ProtectedRoute: FC<RouteProps> = ({ children, ...rest }) => {
+  const { isAuth } = useAppSelector((store) => store.auth);
+  
   return (
     <Route
       {...rest}
-      render={({ location }) => (
-        isAuth
+      render={({ location }): any => (isAuth
           ? (children)
           : (
             <Redirect to={{

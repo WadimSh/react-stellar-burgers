@@ -1,17 +1,24 @@
+import { TActions } from '../actions/actions';
+import { TIngredient, TIngredientConstructor } from '../../types/types';
 import {
   ADD_BUN,
   ADD_INGREDIENT,
   MOVE_INGREDIENT,
   DELETE_INGREDIENT,
   CLEAN_INGREDIENT,
-} from '../actions/actions';
+} from '../constants';
 
-const initialState = {
-  bun: {},
+type TInitialState = {
+  bun: TIngredient | null,
+  ingredients: TIngredientConstructor[]
+};
+
+const initialState: TInitialState = {
+  bun: null,
   ingredients: []
 };
 
-export const burgerReducer = (state = initialState, action) => {
+export const burgerReducer = (state = initialState, action: TActions) => {
   switch (action.type) {
     case ADD_BUN: {
       return {
@@ -42,7 +49,8 @@ export const burgerReducer = (state = initialState, action) => {
     case CLEAN_INGREDIENT: {
       return {
         ...state,
-        ingredients: []
+        ingredients: [],
+        bun: null,
       }
     }
     default: {

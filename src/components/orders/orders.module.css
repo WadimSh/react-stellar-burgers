@@ -1,0 +1,27 @@
+.orderList {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 16px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: calc(100vh - 235px);
+  width: 100%;
+}
+
+.orderList::-webkit-scrollbar-track {
+  background: var(--background-element);
+}
+
+.orderList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.orderList::-webkit-scrollbar-thumb {
+  background: var(--text-inactive-color);
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}

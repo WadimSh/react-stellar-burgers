@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo, FC } from 'react';
-import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import { useHistory } from 'react-router-dom';
 
@@ -9,8 +8,10 @@ import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { TIngredient, TIngredientConstructor } from '../../types/types';
-import { postOrderBurger, OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL, ADD_BUN, ADD_INGREDIENT, CLEAN_INGREDIENT } from '../../services/actions/actions';
+import { postOrderBurger } from '../../services/actions/actions';
+import { OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL, ADD_BUN, ADD_INGREDIENT, CLEAN_INGREDIENT } from '../../services/constants';
 import style from './burger-constructor.module.css';
 
 type TDropItem = {
@@ -21,20 +22,20 @@ type TDropItem = {
 }
 
 const BurgerConstructor: FC = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useAppDispatch();
   const history = useHistory();
-  const { bun, ingredients } = useSelector((store: any) => store.currentBurger);
-  const { isAuth } = useSelector((store: any) => store.auth);
-  const { modal } = useSelector((store: any) => store.orderNumber);
+  const { bun, ingredients } = useAppSelector((store) => store.currentBurger);
+  const { isAuth } = useAppSelector((store) => store.auth);
+  const { modal } = useAppSelector((store) => store.orderNumber);
   const [total, setTotal] = useState<number>(0);
-
+  
   const clickButton = () => {
     dispatch({ type: CLOSE_ORDER_MODAL });
   };
-  const indexIngredients = useMemo(() => [bun, ...ingredients].map((item) => item._id), [bun, ingredients]);
+  const indexIngredients = useMemo(() => bun !== null ? [bun, ...ingredients].map((item) => item._id) : [...ingredients].map((item) => item._id), [bun, ingredients]);
   
   useEffect(() => {
-    const totalPrice = ingredients.reduce((total: number, current: TIngredient) => total + current.price, bun._id ? bun.price * 2 : 0);
+    const totalPrice = ingredients.reduce((total: number, current: TIngredient) => total + current.price, bun !== null ? bun.price * 2 : 0);
     setTotal(totalPrice);
   }, [bun, ingredients]);
 
@@ -42,13 +43,7 @@ const BurgerConstructor: FC = () => {
     if (isAuth) {
       dispatch(postOrderBurger(indexIngredients));
       dispatch({ type: OPEN_ORDER_MODAL });
-      dispatch({
-        type: ADD_BUN,
-        data: {},
-      });
-      dispatch({
-        type: CLEAN_INGREDIENT
-      });
+      dispatch({ type: CLEAN_INGREDIENT });
     } else {
       history.push('/login');
     }
@@ -60,7 +55,7 @@ const BurgerConstructor: FC = () => {
       if (item.element.type === "bun") {
         dispatch({
           type: ADD_BUN,
-          data: { ...item.element, id: Date.now() },
+          data: item.element,
         });
       } else {
         dispatch({
@@ -78,7 +73,7 @@ const BurgerConstructor: FC = () => {
           <OrderDetails />
         </Modal>
       )}
-      {bun._id ? (
+      {bun !== null ? (
         <div className={style.bun}>
         <ConstructorElement
           type="top"
@@ -99,7 +94,7 @@ const BurgerConstructor: FC = () => {
         <div className={style.unactive}>Перетащите сюда ингредиенты</div>
       )}
       
-      {bun._id ? (
+      {bun !== null ? (
       <div className={style.bun}>
         <ConstructorElement
           type="bottom"

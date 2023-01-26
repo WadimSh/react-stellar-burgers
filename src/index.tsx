@@ -8,12 +8,7 @@ import './index.css';
 import App from './components/app/App';
 import rootReducer from './services/reducers/root-reducer';
 import reportWebVitals from './reportWebVitals';
-
-const store = configureStore({
-  reducer: rootReducer,
-  middleware: [thunk],
-  devTools: process.env.NODE_ENV !== 'production'
-})
+import store from './services/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -30,3 +25,5 @@ root.render(
 );
 
 reportWebVitals();
+
+export default store;

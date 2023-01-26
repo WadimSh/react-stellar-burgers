@@ -1,15 +1,15 @@
 import { useState, useEffect, useCallback, FC, FormEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
+import { useAppSelector, useAppDispatch } from "../../../hooks/hooks";
 import useInputs from '../../../hooks/use-inputs';
 import { updateUser } from '../../../services/actions/auth-actions';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './profile-form.module.css';
 
 const ProfileForm: FC = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useAppDispatch();
 
-  const { user } = useSelector((store: any) => store.auth);
+  const { user } = useAppSelector((store) => store.auth);
   const { values, handleValues, setValues } = useInputs({ name: user.name, email: user.email, password: "" });
   const [disabledButton, setDisabledButton] = useState(false);
 

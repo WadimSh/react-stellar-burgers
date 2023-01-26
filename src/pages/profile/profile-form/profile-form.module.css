@@ -1,5 +1,5 @@
 .form {
-  composes: mb-20 from global;
+  composes: mt-10 mb-20 from global;
   width: 480px;
   display: flex;
   flex-direction: column;

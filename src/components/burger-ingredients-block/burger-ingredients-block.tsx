@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { useSelector } from "react-redux";
 
+import { useAppSelector } from "../../hooks/hooks";
 import { TIngredient } from '../../types/types';
 import BurgerIngredientsCard from '../burger-ingredients-card/burger-ingredients-card';
 import style from './burger-ingredients-block.module.css';
@@ -12,7 +12,7 @@ interface IIngredientsItems {
 }
 
 const BurgerIngredientsBlock: FC<IIngredientsItems> = ({ type, name, tabRef }) => {
-  const data = useSelector((store: any) => store.ingredientsBurger.data);
+  const data = useAppSelector((store) => store.ingredientsBurger.data);
    
   return (
     <>

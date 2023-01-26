@@ -1,13 +1,14 @@
 import { FC } from "react";
-import { useDispatch } from 'react-redux';
 import { Route, Switch, NavLink } from 'react-router-dom';
 
+import { useAppDispatch } from '../../hooks/hooks';
 import ProfileForm from './profile-form/profile-form';
+import Orders from '../../components/orders/orders';
 import style from "./profile.module.css";
 import { logout } from '../../services/actions/auth-actions';
 
 const Profile: FC = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useAppDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -58,7 +59,7 @@ const Profile: FC = () => {
           <ProfileForm />
         </Route>
         <Route exact path="/profile/orders">
-          Данный раздел находится в разработке.
+          <Orders />
         </Route>
       </Switch>
     </section>

@@ -1,8 +1,7 @@
-import { useEffect, FC } from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect, FC, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory, useRouteMatch } from 'react-router-dom';
 
 import AppHeader from '../app-header/app-header';
 import Main from '../main/main';
@@ -11,27 +10,50 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import ProtectedRoute from '../protected-route/protected-route';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import OrdersDetail from '../orders/orders-detail/orders-detail';
+import { Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound, Feed } from '../../pages';
 
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { TLocation } from '../../types/types';
 import { getUser } from '../../services/actions/auth-actions';
-import { Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound } from '../../pages';
 import { getIngredientsBurger } from '../../services/actions/actions';
 import style from './App.module.css';
+
+type TUseRouteMatch = {
+  [id: string]: string | undefined
+}
 
 const App: FC = () => {
   const location = useLocation<TLocation>();
   const history = useHistory();
-  const dispatch = useDispatch<any>();
-    
-  const { isAuth } = useSelector((store: any) => store.auth);
-  const isLoading = useSelector((store: any) => store.ingredientsBurger.isLoading);
-  const hasError = useSelector((store: any) => store.ingredientsBurger.hasError);
+  const dispatch = useAppDispatch();
   const background = location.state && location.state.background;
+    
+  const { isAuth } = useAppSelector((store) => store.auth);
+  const isLoading = useAppSelector((store) => store.ingredientsBurger.isLoading);
+  const hasError = useAppSelector((store) => store.ingredientsBurger.hasError);
+  const profileFeed = useAppSelector((store) => store.wsFeed.orders);
+  const profileOrders = useAppSelector((store) => store.wsOrders.orders);
+
+  const [orderNumber, setOrderNumber] = useState<number | undefined>(0);
+  const id = useRouteMatch<TUseRouteMatch>(["/feed/:id"])?.params?.id;
+  const idOrder = useRouteMatch<TUseRouteMatch>(["/profile/orders/:id"])?.params?.id;
+  
+  useEffect(() => {
+    if (id !== undefined) {
+      const order = profileFeed.find((order) => order._id === id);
+      setOrderNumber(order?.number)
+    }
+    if (idOrder !== undefined) {
+      const order = profileOrders.find((order) => order._id === idOrder);
+      setOrderNumber(order?.number)
+    }
+  }, [location]);
   
   const clickButton = () => {
     history.goBack();
   };
-  
+
   useEffect(() => {
     dispatch(getIngredientsBurger());
   }, [dispatch]);
@@ -40,7 +62,7 @@ const App: FC = () => {
     if (!isAuth && localStorage.getItem('jwt')) {
       dispatch(getUser());
     }
-  }, []);
+  }, [dispatch]);
   
   return (
     <div className={style.App}>
@@ -58,6 +80,15 @@ const App: FC = () => {
           )}
         </Main>
       </Route>
+      <Route path="/feed" exact={true}>
+        <Feed />
+      </Route>
+      <ProtectedRoute path="/profile" exact={true}>
+        <Profile />
+      </ProtectedRoute>
+      <ProtectedRoute path="/profile/orders" exact={true}>
+        <Profile />
+      </ProtectedRoute>
       <Route path="/login" exact={true}>
         <Login />
       </Route>
@@ -73,8 +104,11 @@ const App: FC = () => {
       <Route path="/ingredients/:id" exact={true}>
         <Ingredients />
       </Route>
-      <ProtectedRoute path="/profile">
-        <Profile />
+      <Route path="/feed/:id" exact={true}>
+        <OrdersDetail />
+      </Route>
+      <ProtectedRoute path="/profile/orders/:id" exact={true}>
+        <OrdersDetail />
       </ProtectedRoute>
       <Route>
         <NotFound />
@@ -86,6 +120,20 @@ const App: FC = () => {
             <IngredientDetails />
           </Modal>
         </Route>
+      )}
+      {background && id && (
+        <Route path="/feed/:id">
+          <Modal onClose={clickButton} header={`#${orderNumber}`}>
+            <OrdersDetail />
+          </Modal>
+        </Route>
+      )}
+      {background && idOrder && (
+        <ProtectedRoute path="/profile/orders/:id" exact={true}>
+          <Modal onClose={clickButton} header={`#${orderNumber}`}>
+            <OrdersDetail />
+          </Modal>
+        </ProtectedRoute>
       )}
     </div>
   );
