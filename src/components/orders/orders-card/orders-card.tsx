@@ -17,7 +17,7 @@ const OrdersCard: FC<IOrderCard> = ({ order, status }) => {
   const ingredients = useAppSelector((store) => store.ingredientsBurger.data);
   const { createdAt, number, name } = order;
   const arrIngredientsLength = order.ingredients.length;
-  const hideIngredients = arrIngredientsLength - 6;
+  const hideIngredients = arrIngredientsLength - 5;
   const maxIngredients = 6;
 
   const orderIngredientsData = useMemo(() => {
@@ -76,7 +76,21 @@ const OrdersCard: FC<IOrderCard> = ({ order, status }) => {
               );
             })}
           {orderIngredientsData &&
-            arrIngredientsLength >= 6 &&
+            arrIngredientsLength === 6 &&
+            orderIngredientsData.slice(0, 6).map((item, index) => {
+              let zIndex = maxIngredients - index;
+              return (
+                <li
+                  className={style.items}
+                  style={{ zIndex: zIndex }}
+                  key={index}
+                >
+                  {item && <OrdersImg image={item.image} alt={item.name} />}
+                </li>
+              );
+            })}
+          {orderIngredientsData &&
+            arrIngredientsLength > 6 &&
             orderIngredientsData.slice(0, 5).map((item, index) => {
               let zIndex = maxIngredients - index;
               return (

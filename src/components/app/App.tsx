@@ -56,14 +56,11 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(getIngredientsBurger());
-  }, [dispatch]);
-
-  useEffect(() => {
     if (!isAuth && localStorage.getItem('jwt')) {
       dispatch(getUser());
     }
   }, [dispatch]);
-  
+
   return (
     <div className={style.App}>
       <AppHeader />
