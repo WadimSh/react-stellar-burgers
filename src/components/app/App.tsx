@@ -56,7 +56,8 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(getIngredientsBurger());
-    if (!isAuth && localStorage.getItem('jwt')) {
+    const hasTokan = (localStorage.getItem('jwt') != null);
+    if (!isAuth && hasTokan) {
       dispatch(getUser());
     }
   }, [dispatch]);
