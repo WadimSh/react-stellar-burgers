@@ -11,4 +11,4 @@
 - Запустите проект – `npm start`
 - Перейти на `http://localhost:3000/`
 
-https://wadimsh.github.io/react-stellar-burgers/index.html
+https://wadimsh.github.io/react-stellar-burgers/build/index.html
