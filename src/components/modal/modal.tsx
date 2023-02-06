@@ -29,7 +29,7 @@ return createPortal (
     <div className={style.modal}>
       <div className={style.header}>
         <h3 className={style.title}>{header}</h3>
-        <div className={style.div}>
+        <div className={style.div} data-cy="modal-close">
           <CloseIcon type="primary" onClick={onClose}/>
         </div>
       </div>

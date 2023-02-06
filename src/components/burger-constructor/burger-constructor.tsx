@@ -67,7 +67,7 @@ const BurgerConstructor: FC = () => {
   });
 
   return (
-    <section className={style.section} ref={dropTarget}>
+    <section className={style.section} ref={dropTarget} data-cy="constructor-form">
       {modal && (
         <Modal onClose={clickButton} header={" "}>
           <OrderDetails />

@@ -25,6 +25,7 @@ const TotalPrice: FC<ITotalPrice> = ({ totalPrice, clickButton }) => {
         size="large"
         onClick={clickButton}
         disabled={logic}
+        data-cy="button"
       >
 			  Оформить заказ
 			</Button>

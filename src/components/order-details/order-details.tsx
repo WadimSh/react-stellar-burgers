@@ -8,7 +8,7 @@ const OrderDetails: FC = () => {
 const orderNumber = useAppSelector((store) => store.orderNumber.order);
 
 return (
-  <div className={style.wrapper}>
+  <div className={style.wrapper} data-cy="order-details">
     <h2 className={style.title}>{orderNumber}</h2>
     <p className={style.subtitle}>{orderNumber ? 'идентификатор заказа' : 'Загружается ...'}</p>
     <img className={style.img} src={done} alt="иконка" />
