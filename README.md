@@ -12,4 +12,4 @@
 - Перейти на `http://localhost:3000/`
 
 
-https://github.com/wadimsh/react-stellar-burgers/
+https://wadimsh.github.io/react-stellar-burgers/index.html
