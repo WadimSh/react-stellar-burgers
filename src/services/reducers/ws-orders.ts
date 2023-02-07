@@ -16,7 +16,7 @@ type TInitialState = {
   error: MessageEvent | null,
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   wsConnected: false,
   orders: [],
   total: 0,

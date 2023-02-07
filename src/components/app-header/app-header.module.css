@@ -48,6 +48,6 @@
 }
 
 .linkActive:last-child, .link:last-child {
-  width: 200px;
+  width: 180px;
   margin-left: auto;
 }

@@ -39,6 +39,7 @@ const BurgerIngredientsCard: FC<IIngredientsItems> = ({ element }) => {
       className={style.item}
       style={{ opacity }}
       ref={dragRef}
+      data-cy="item-ingredient"
     >
       {counter() !== 0 && <Counter count={counter()} size="default" />}
       <img src={element.image} className={style.image} alt={element.name} />

@@ -18,13 +18,13 @@ export const Feed: FC = () => {
   }, [dispatch]);
 
   return (
-    <div className={style.page}>
+    <section className={style.page}>
       <h2 className={style.title}>Лента заказов</h2>
       <div className={style.container}>
         <OrdersFeed />
         <OrdersStat />
       </div>
-    </div>
+    </section>
   );
 }
 

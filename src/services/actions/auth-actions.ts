@@ -157,42 +157,40 @@ export type TAuthActions =
   | IUpdateUserRequest
   | IUpdateUserFailed
 
-export const getUser: AppThunk = () => {
-  return function(dispatch) {
-    dispatch({
-      type: GET_USER_REQUEST
-    });
-    api.getUser()
-    .then((res) => {
+  export const getUser: AppThunk = () => {
+    return function(dispatch) {
       dispatch({
-        type: GET_USER,
-        user: res.user,
+        type: GET_USER_REQUEST
       });
-    })
-    .catch(() => {
-      if (localStorage.getItem('jwt')) {
-        dispatch(refreshToken());
-        api.getUser()
-          .then((res) => {
-            dispatch({
-              type: GET_USER,
-              user: res.user,
-            });
-          })
-      } else {
+      api.getUser()
+      .then((res) => {
         dispatch({
-          type: GET_USER_FAILED
+          type: GET_USER,
+          user: res.user,
         });
-      }
-    });
-  }
-};
+      })
+      .catch((res) => {
+        if (res.success === undefined) {
+          dispatch(refreshToken());
+          api.getUser()
+            .then((res) => {
+              dispatch({
+                type: GET_USER,
+                user: res.user,
+              });
+            })
+        } else {
+          dispatch({
+            type: GET_USER_FAILED
+          });
+        }
+      });
+    }
+  };
 
-export const updateUser:AppThunk = (name: string, email: string, password: string) => {
+export const updateUser: AppThunk = (name: string, email: string, password: string) => {
   return function(dispatch) {
-    dispatch({
-      type: UPDATE_USER_REQUEST
-    });
+    dispatch({ type: UPDATE_USER_REQUEST });
     api.updateUser(name, email, password)
     .then((res) => {
       dispatch({
@@ -205,9 +203,7 @@ export const updateUser:AppThunk = (name: string, email: string, password: strin
         dispatch(refreshToken());
         dispatch(updateUser(name, email, password));
       } else {
-        dispatch({
-          type: UPDATE_USER_FAILED
-        });
+        dispatch({ type: UPDATE_USER_FAILED });
       }
     });
   }
@@ -215,9 +211,7 @@ export const updateUser:AppThunk = (name: string, email: string, password: strin
 
 export function requestPassword(email: string) {
   return function(dispatch: AppDispatch) {
-    dispatch({
-      type: REQUEST_PASSWORD_REQUEST
-    });
+    dispatch({ type: REQUEST_PASSWORD_REQUEST });
     api.requestPassword(email)
     .then(() => {
       dispatch({
@@ -225,18 +219,14 @@ export function requestPassword(email: string) {
       });
     })
     .catch(() => {
-      dispatch({
-        type: REQUEST_PASSWORD_FAILED
-      })
+      dispatch({ type: REQUEST_PASSWORD_FAILED })
     });
   }
 };
 
 export function resetPassword(token: string, password: string) {
   return function(dispatch: AppDispatch) {
-    dispatch({
-      type: RESET_PASSWORD_REQUEST
-    });
+    dispatch({ type: RESET_PASSWORD_REQUEST });
     api.resetPassword(token, password)
     .then(() => {
       dispatch({
@@ -244,9 +234,7 @@ export function resetPassword(token: string, password: string) {
       });
     })
     .catch(() => {
-      dispatch({
-        type: RESET_PASSWORD_FAILED
-      })
+      dispatch({ type: RESET_PASSWORD_FAILED })
     });
   }
 };
@@ -257,8 +245,7 @@ export function register(name: string, email: string, password: string) {
     api.registerUser(name, email, password)
       .then((res) => {
         if (res.success) {
-          const accessToken = res.accessToken.split("Bearer ")[1];
-          setCookie('token', accessToken, { expires: 1200 });
+          setCookie('token', res.accessToken, { expires: 1200 });
           localStorage.setItem('jwt', res.refreshToken);
           dispatch({
             type: REGISTER_USER,
@@ -267,23 +254,18 @@ export function register(name: string, email: string, password: string) {
         }
       })
       .catch(() => {
-        dispatch({
-          type: REGISTER_USER_FAILED
-        })
+        dispatch({ type: REGISTER_USER_FAILED })
       });
   }
 };
 
 export function login(email: string, password: string) {
   return function(dispatch: AppDispatch) {
-    dispatch({
-      type: LOGIN_USER_REQUEST
-    });
+    dispatch({ type: LOGIN_USER_REQUEST });
     api.authorization(email, password)
     .then((res) => {
       if (res.success) {
-        const accessToken = res.accessToken.split("Bearer ")[1];
-        setCookie('token', accessToken, { expires: 1200 });
+        setCookie('token', res.accessToken, { expires: 1200 });
         localStorage.setItem('jwt', res.refreshToken);
         dispatch({
           type: LOGIN_USER,
@@ -292,41 +274,31 @@ export function login(email: string, password: string) {
       }
     })
     .catch(() => {
-      dispatch({
-        type: LOGIN_USER_FAILED
-      })
+      dispatch({ type: LOGIN_USER_FAILED })
     });
   }
 };
 
 export function logout() {
   return function(dispatch: AppDispatch) {
-    dispatch({
-      type: LOGOUT_REQUEST
-    });
+    dispatch({ type: LOGOUT_REQUEST });
     api.logout()
     .then((res) => {
       if (res.success) {
         deleteCookie('token');
         localStorage.removeItem('jwt');
-        dispatch({
-          type: LOGOUT
-        });
+        dispatch({ type: LOGOUT });
       }
     })
     .catch(() => {
-      dispatch({
-        type: LOGOUT_FAILED
-      })
+      dispatch({ type: LOGOUT_FAILED })
     });
   }
 };
 
 export function refreshToken() {
   return function(dispatch: AppDispatch) {
-    dispatch({
-      type: UPDATE_TOKEN_REQUEST
-    });
+    dispatch({ type: UPDATE_TOKEN_REQUEST });
     api.updateToken()
     .then((res) => {
       if (res.success) {
@@ -339,9 +311,7 @@ export function refreshToken() {
       }
     })
     .catch(() => {
-      dispatch({
-        type: UPDATE_TOKEN_FAILED
-      })
+      dispatch({ type: UPDATE_TOKEN_FAILED })
     });
   }
-}
+};

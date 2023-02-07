@@ -1,9 +1,10 @@
 .wrapper {
-  composes: pt-20 pl-30 from global;
+  composes: pt-20 from global;
   width: 100%;
-  max-width: 1240px;
+  width: 1240px;
   display: flex;
-  margin-right: auto;
+	margin: 0 auto;
+  
 }
 
 .nav {

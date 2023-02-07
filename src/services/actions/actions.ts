@@ -95,9 +95,7 @@ export type TActions =
 
 export function getIngredientsBurger() {
   return function(dispatch: AppDispatch) {
-    dispatch({
-      type: GET_INGREDIENTS_REQUEST
-    });
+    dispatch({ type: GET_INGREDIENTS_REQUEST });
     api.getIngredients()
       .then((res) => {
         dispatch({
@@ -106,18 +104,14 @@ export function getIngredientsBurger() {
         })
       })
       .catch(() => {
-        dispatch({
-          type: GET_INGREDIENTS_FAILED
-        })
+        dispatch({ type: GET_INGREDIENTS_FAILED })
       })
   }
 };
 
 export function postOrderBurger(order: Array<string>) {
   return function(dispatch: AppDispatch) {
-    dispatch({
-      type: GET_ORDER_NUMBER_REQUEST
-    });
+    dispatch({ type: GET_ORDER_NUMBER_REQUEST });
     api.postOrderDetails(order)
       .then((res) => {
         dispatch({
@@ -126,9 +120,7 @@ export function postOrderBurger(order: Array<string>) {
         })
       })
       .catch(() => {
-        dispatch({
-          type: GET_ORDER_NUMBER_FAILED
-        })
+        dispatch({ type: GET_ORDER_NUMBER_FAILED })
       })
   }
 };

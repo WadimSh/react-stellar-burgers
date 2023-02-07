@@ -10,8 +10,8 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWSActions, isAuth: b
 			const { dispatch } = store;
 			const { type } = action;
 			const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
-			const accessToken = getCookie('token')
-
+			const accessToken = getCookie('token')?.replace('Bearer ', '');
+			
 			if (type === wsInit) {
 				if (!isAuth) {
 					socket = new WebSocket(wsUrl);
