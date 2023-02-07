@@ -31,7 +31,7 @@ const Login: FC = () => {
   }
 
   return (
-    <section className={style.container}>
+    <section className={style.container} data-cy="login-form">
       <h2 className={style.title}>
         Вход
       </h2>

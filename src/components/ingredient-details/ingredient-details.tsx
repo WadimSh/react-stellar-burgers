@@ -17,7 +17,7 @@ const IngredientDetails: FC = () => {
   if (!ingredient) return null;
   
 return (
-    <div className={style.wrapper} data-cy="ingredient-details-modal">
+    <div className={style.wrapper}>
       <img className={style.img} src={ingredient?.image} alt={ingredient?.name} />
       <h2 className={style.title}>{ingredient?.name}</h2>
       <ul className={style.list}>

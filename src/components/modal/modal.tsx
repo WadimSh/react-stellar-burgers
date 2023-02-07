@@ -26,7 +26,7 @@ const Modal: FC<IModal> = ({ onClose, header, children }) => {
     
 return createPortal (
     <>
-    <div className={style.modal}>
+    <div className={style.modal} data-cy="modal">
       <div className={style.header}>
         <h3 className={style.title}>{header}</h3>
         <div className={style.div} data-cy="modal-close">

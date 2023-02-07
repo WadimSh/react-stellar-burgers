@@ -57,7 +57,7 @@ const BurgerConstructorIngredient: FC<IConstructorItems> = ({ item, index }) => 
 
 
   return (
-    <li className={style.item} style={{ opacity }} ref={ref} data-cy="item-ingredient">
+    <li className={style.item} style={{ opacity }} ref={ref}>
       <DragIcon
        type="primary"
       />
